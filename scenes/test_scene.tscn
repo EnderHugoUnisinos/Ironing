@@ -1,20 +1,20 @@
 [gd_scene load_steps=25 format=3 uid="uid://ctpgitiggqlv0"]
 
-[ext_resource type="Material" uid="uid://sg2s514fawpu" path="res://assets/materials/floor_placeholder.tres" id="1_ia1lp"]
-[ext_resource type="PackedScene" uid="uid://cp8242762l2nq" path="res://objects/character_iron.tscn" id="2_ia1lp"]
+[ext_resource type="Material" uid="uid://sg2s514fawpu" path="res://assets/materials/floor_placeholder.tres" id="1_j8ivh"]
+[ext_resource type="PackedScene" uid="uid://cp8242762l2nq" path="res://objects/character_iron.tscn" id="2_nd71p"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_coq8p"]
 points = PackedVector3Array(-50, 0, -50, -50, 0, 50, 50, 0, -50, 50, 0, 50)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_6adnx"]
-material = ExtResource("1_ia1lp")
+material = ExtResource("1_j8ivh")
 size = Vector2(100, 100)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ia1lp"]
 points = PackedVector3Array(-4, -0.5, -2.5, -4, -0.5, 2.5, 0, 0.5, -2.5, 4, -0.5, -2.5, 4, -0.5, 2.5, 0, 0.5, 2.5)
 
 [sub_resource type="PrismMesh" id="PrismMesh_ia1lp"]
-material = ExtResource("1_ia1lp")
+material = ExtResource("1_j8ivh")
 size = Vector3(8, 1, 5)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_sasra"]
@@ -27,21 +27,21 @@ size = Vector2(5, 4)
 points = PackedVector3Array(-2.73364, 0.233645, -50.2336, 2.87383, 0.233645, 50.2336, 2.87383, 0.233645, -50.2336, -2.73364, 0.233645, 50.2336)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ia1lp"]
-material = ExtResource("1_ia1lp")
+material = ExtResource("1_j8ivh")
 size = Vector2(5, 100)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7cbxl"]
 points = PackedVector3Array(-6.5, 0, -2, -6.5, 0, 2, 6.5, 0, -2, 6.5, 0, 2)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_sasra"]
-material = ExtResource("1_ia1lp")
+material = ExtResource("1_j8ivh")
 size = Vector2(13, 4)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_8pr8v"]
 points = PackedVector3Array(0.10057, 1.4138, 1.86823, -3.4279, -1.5, -1.98214, -3.4279, -1.5, 1.98214, 3.4279, -1.5, -1.98214, 3.4279, -1.5, 1.98214, -0.10057, 1.4138, -1.86823, -0.10057, 1.4138, 1.86823, 0.10057, 1.4138, -1.86823, 3.32723, -1.35191, -1.92393, -3.32723, -1.35191, 1.92393, 3.32723, -1.35191, 1.92393, -3.32723, -1.35191, -1.92393)
 
 [sub_resource type="PrismMesh" id="PrismMesh_sasra"]
-material = ExtResource("1_ia1lp")
+material = ExtResource("1_j8ivh")
 size = Vector3(7, 3, 4)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_buypi"]
@@ -60,7 +60,7 @@ size = Vector3(23, 5, 5)
 points = PackedVector3Array(2.5, 2.5, 2.5, 2.5, 2.5, -2.5, -2.5, 2.5, 2.5, 2.5, -2.5, 2.5, 2.5, -2.5, -2.5, -2.5, 2.5, -2.5, -2.5, -2.5, 2.5, -2.5, -2.5, -2.5)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2nij2"]
-material = ExtResource("1_ia1lp")
+material = ExtResource("1_j8ivh")
 size = Vector2(4.489, 100)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_rpuu0"]
@@ -113,7 +113,7 @@ transform = Transform3D(0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 0, 1, 9, 1.20897
 shape = SubResource("ConvexPolygonShape3D_sasra")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D7"]
-material_override = ExtResource("1_ia1lp")
+material_override = ExtResource("1_j8ivh")
 mesh = SubResource("PlaneMesh_coq8p")
 skeleton = NodePath("../..")
 
@@ -123,7 +123,7 @@ shape = SubResource("ConvexPolygonShape3D_2nij2")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22546, 0.12397, 0)
-material_override = ExtResource("1_ia1lp")
+material_override = ExtResource("1_j8ivh")
 mesh = SubResource("PlaneMesh_ia1lp")
 skeleton = NodePath("../..")
 
@@ -133,7 +133,7 @@ shape = SubResource("ConvexPolygonShape3D_2nij2")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.110046, 0.190603, 0)
-material_override = ExtResource("1_ia1lp")
+material_override = ExtResource("1_j8ivh")
 mesh = SubResource("PlaneMesh_ia1lp")
 skeleton = NodePath("../..")
 
@@ -170,7 +170,7 @@ shape = SubResource("ConvexPolygonShape3D_buypi")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D11"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0214386, -0.0575285, -0.0444412)
-material_override = ExtResource("1_ia1lp")
+material_override = ExtResource("1_j8ivh")
 mesh = SubResource("BoxMesh_ia1lp")
 skeleton = NodePath("../..")
 
@@ -179,7 +179,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 79, 0, -9)
 shape = SubResource("ConvexPolygonShape3D_njel3")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D12"]
-material_override = ExtResource("1_ia1lp")
+material_override = ExtResource("1_j8ivh")
 mesh = SubResource("BoxMesh_vr1i5")
 skeleton = NodePath("../..")
 
@@ -188,7 +188,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.4, -0.7, -12.4)
 shape = SubResource("ConvexPolygonShape3D_vr1i5")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D10"]
-material_override = ExtResource("1_ia1lp")
+material_override = ExtResource("1_j8ivh")
 mesh = SubResource("BoxMesh_ia1lp")
 skeleton = NodePath("../..")
 
@@ -197,7 +197,7 @@ transform = Transform3D(0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 0, 1, 41, 2.9830
 shape = SubResource("ConvexPolygonShape3D_sasra")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D13"]
-material_override = ExtResource("1_ia1lp")
+material_override = ExtResource("1_j8ivh")
 mesh = SubResource("PlaneMesh_coq8p")
 skeleton = NodePath("../..")
 
@@ -206,7 +206,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.4, -0.7, -27.4)
 shape = SubResource("ConvexPolygonShape3D_njel3")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D14"]
-material_override = ExtResource("1_ia1lp")
+material_override = ExtResource("1_j8ivh")
 mesh = SubResource("BoxMesh_vr1i5")
 skeleton = NodePath("../..")
 
@@ -215,7 +215,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.4, -0.7, -17.4)
 shape = SubResource("ConvexPolygonShape3D_vr1i5")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D15"]
-material_override = ExtResource("1_ia1lp")
+material_override = ExtResource("1_j8ivh")
 mesh = SubResource("BoxMesh_ia1lp")
 skeleton = NodePath("../..")
 
@@ -224,7 +224,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.4, -0.7, -22.4)
 shape = SubResource("ConvexPolygonShape3D_vr1i5")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D16"]
-material_override = ExtResource("1_ia1lp")
+material_override = ExtResource("1_j8ivh")
 mesh = SubResource("BoxMesh_ia1lp")
 skeleton = NodePath("../..")
 
@@ -233,20 +233,20 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -40.42
 shape = SubResource("ConvexPolygonShape3D_njel3")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D17"]
-material_override = ExtResource("1_ia1lp")
+material_override = ExtResource("1_j8ivh")
 mesh = SubResource("BoxMesh_vr1i5")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="StaticBody3D"]
 transform = Transform3D(-1, 0, -7.57103e-08, 0, 1, -4.37114e-08, 7.57103e-08, -4.37114e-08, -1, 56.557, -3.88148, 0)
-material_override = ExtResource("1_ia1lp")
+material_override = ExtResource("1_j8ivh")
 mesh = SubResource("PlaneMesh_2nij2")
 
 [node name="CollisionShape3D18" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(-1, 0, -7.57103e-08, 0, 1, -4.37114e-08, 7.57103e-08, -4.37114e-08, -1, 56.4977, -3.71614, 3.72529e-07)
 shape = SubResource("ConvexPolygonShape3D_rpuu0")
 
-[node name="Character_Iron" parent="." instance=ExtResource("2_ia1lp")]
+[node name="Character_Iron" parent="." instance=ExtResource("2_nd71p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.013722, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
