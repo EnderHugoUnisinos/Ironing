@@ -19,6 +19,8 @@ extends CharacterBody3D
 @onready var rear_ray = $CollisionBottom/RearRay
 @onready var ground_ray = $CollisionBottom/GroundRay
 @onready var ramp_ray = $CollisionBottom/RampRay
+@onready var left_ray = $CollisionBottom/LeftRay
+@onready var right_ray = $CollisionBottom/RightRay
 
 enum iron_mode {STANDING, IRONING}
 var current_mode : iron_mode = iron_mode.STANDING
@@ -26,7 +28,6 @@ var walk = false
 var jumping = false
 var last_y_position: float
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	last_y_position = self.global_position.y
 
@@ -104,7 +105,7 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, 0.02)
 			velocity.z = move_toward(velocity.z, 0, 0.02)
 	else:
-		if is_on_floor() and timer.time_left == 0:
+		if is_on_floor():
 			model.rotation.y = rotate_toward(model.rotation.y, atan2(-velocity.x,-velocity.z), 0.1)
 			if current_mode == iron_mode.IRONING or timer.time_left > 0:
 				velocity -= velocity * min(delta/0.3, 1.0)
@@ -112,13 +113,19 @@ func _physics_process(delta: float) -> void:
 				velocity -= velocity * min(delta/0.1, 1.0)
 		else:
 				velocity -= velocity * min(delta/0.9, 1.0)
-			
+	
 	collision_top.rotation.y = model.rotation.y
 	collision_bottom.rotation.y = model.rotation.y
 	if !is_on_floor():
 		velocity.y = velocity.y - (6*delta)
-	
-	
+	elif (!ground_ray.is_colliding()):
+		var nl = left_ray.get_collision_normal() if left_ray.is_colliding() else Vector3.UP
+		var nr = right_ray.get_collision_normal() if right_ray.is_colliding() else Vector3.UP
+		
+		var n = ((nr + nr) / 2.0).normalized()
+		var xform = align_with_y(global_transform, n)
+		transform = transform.interpolate_with(xform, 0.4)
+		
 	# If either side is in the air, align to slope.
 	if (front_ray.is_colliding() or rear_ray.is_colliding()):
 		if ((ground_ray.is_colliding() and !self.is_on_floor()) or ramp_ray.is_colliding()): 
