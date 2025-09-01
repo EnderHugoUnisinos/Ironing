@@ -1,8 +1,25 @@
-[gd_scene load_steps=36 format=4 uid="uid://cp8242762l2nq"]
+[gd_scene load_steps=39 format=4 uid="uid://cp8242762l2nq"]
 
 [ext_resource type="Script" uid="uid://diqp3b7x3sit7" path="res://scripts/player.gd" id="1_mkvct"]
 [ext_resource type="Script" uid="uid://ihxquk3vhpsl" path="res://scripts/camera_pivot.gd" id="2_7de08"]
 [ext_resource type="Script" uid="uid://dfq3ixu3fvvn6" path="res://objects/rotation.gd" id="2_ikjww"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7de08"]
+emission_shape = 3
+emission_box_extents = Vector3(0.2, 0.05, 0.435)
+angle_min = 1.07288e-05
+angle_max = 360.0
+spread = 180.0
+flatness = 1.0
+initial_velocity_min = 0.5
+initial_velocity_max = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7de08"]
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_7de08"]
+material = SubResource("StandardMaterial3D_7de08")
+size = Vector2(0.05, 0.05)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ia1lp"]
 size = Vector3(0.400635, 0.158081, 0.844727)
@@ -308,7 +325,7 @@ advance_expression = "walk == false"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7de08"]
 switch_mode = 2
 advance_mode = 2
-advance_expression = "current_mode == iron_mode.Standing"
+advance_expression = "current_mode == iron_mode.STANDING"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ikjww"]
 switch_mode = 2
@@ -328,10 +345,23 @@ states/Start/position = Vector2(300, 184.889)
 states/Waddle/node = SubResource("AnimationNodeAnimation_2nij2")
 states/Waddle/position = Vector2(554.777, 274.999)
 transitions = ["Start", "Idle_Up", SubResource("AnimationNodeStateMachineTransition_sasra"), "Idle_Down", "Going Up", SubResource("AnimationNodeStateMachineTransition_7cbxl"), "Going Up", "Idle_Up", SubResource("AnimationNodeStateMachineTransition_8pr8v"), "Idle_Up", "Going Down", SubResource("AnimationNodeStateMachineTransition_buypi"), "Going Down", "Idle_Down", SubResource("AnimationNodeStateMachineTransition_njel3"), "Waddle", "Going Down", SubResource("AnimationNodeStateMachineTransition_coq8p"), "Idle_Up", "Waddle", SubResource("AnimationNodeStateMachineTransition_2nij2"), "Waddle", "Idle_Up", SubResource("AnimationNodeStateMachineTransition_vr1i5"), "Going Down", "Going Up", SubResource("AnimationNodeStateMachineTransition_7de08"), "Going Up", "Going Down", SubResource("AnimationNodeStateMachineTransition_ikjww")]
-graph_offset = Vector2(-446.5, -51)
+graph_offset = Vector2(-455.5, 35)
 
 [node name="Character_Iron" type="CharacterBody3D"]
 script = ExtResource("1_mkvct")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0438773, 0)
+emitting = false
+amount = 20
+lifetime = 0.5
+interp_to_end = 0.1
+one_shot = true
+speed_scale = 1.2
+explosiveness = 1.0
+visibility_aabb = AABB(-1, -1, -1, 2, 2, 2)
+process_material = SubResource("ParticleProcessMaterial_7de08")
+draw_pass_1 = SubResource("QuadMesh_7de08")
 
 [node name="CollisionBottom" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0.0790624, -0.0103748)
@@ -400,7 +430,7 @@ advance_expression_base_node = NodePath("../..")
 anim_player = NodePath("../AnimationPlayer")
 
 [node name="Pivot" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(1, 0, 2.13163e-14, 0, 1, 0, -2.13163e-14, 0, 1, 0, 0, 0)
 script = ExtResource("2_7de08")
 
 [node name="Camera3D" type="Camera3D" parent="Pivot"]

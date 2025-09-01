@@ -38,17 +38,15 @@ func _input(event: InputEvent) -> void:
 		Input.MouseMode.MOUSE_MODE_VISIBLE
 	if Input.is_action_pressed("reset"):
 		get_parent().get_tree().reload_current_scene()
-	if Input.is_action_just_pressed("special"):
-		if timer.time_left == 0 and is_on_floor():
-			switch_mode()
 
-func switch_mode():
-	timer.start(cooldown)
-	if current_mode == iron_mode.STANDING:
+func switch_mode(switch_mode):
+	if switch_mode == iron_mode.IRONING:
+		timer.start(cooldown)
 		current_mode = iron_mode.IRONING
 		walk = false
 		self.floor_stop_on_slope = false
-	else:
+	elif switch_mode == iron_mode.STANDING :
+		timer.start(cooldown)
 		current_mode = iron_mode.STANDING
 		self.floor_stop_on_slope = true
 
@@ -57,7 +55,12 @@ func _process(delta: float) -> void:
 		walk = true
 	else:
 		walk = false
-		
+	if Input.is_action_pressed("special"):
+		if timer.time_left == 0 and is_on_floor() and current_mode != iron_mode.IRONING:
+			switch_mode(iron_mode.IRONING)
+	elif !Input.is_action_pressed("special"):
+		if timer.time_left == 0 and is_on_floor() and current_mode != iron_mode.STANDING:
+			switch_mode(iron_mode.STANDING)
 
 func _physics_process(delta: float) -> void:
 	var input_vec := Vector2(
@@ -66,10 +69,11 @@ func _physics_process(delta: float) -> void:
 	)
 	if is_on_floor():
 		jumping = false
-	if Input.is_action_just_pressed("jump") and !jumping and timer.time_left == 0:
+	if Input.is_action_just_pressed("jump") and !jumping:
 		var jump_height: float
 		if current_mode == iron_mode.IRONING:
 			jump_height = ironing_jump_height
+			$GPUParticles3D.restart()
 		else:
 			jump_height = standing_jump_height
 		self.velocity.y = jump_height
@@ -91,13 +95,22 @@ func _physics_process(delta: float) -> void:
 
 		# Move relative to camera
 		var direction := (cam_forward * input_vec.y) + (cam_right * input_vec.x)
-		if timer.time_left == 0:
-			if current_mode == iron_mode.STANDING:
-					velocity.x = direction.x * waddle_speed
-					velocity.z = direction.z * waddle_speed
-			if current_mode == iron_mode.IRONING:
-					velocity.x =  clamp(velocity.x + (direction.x * ironing_speed * delta), -max_speed, max_speed)
-					velocity.z = clamp(velocity.z + (direction.z * ironing_speed * delta), -max_speed, max_speed)
+		
+		if current_mode == iron_mode.STANDING:
+			if timer.time_left == 0:
+				velocity.x = direction.x * waddle_speed
+				velocity.z = direction.z * waddle_speed
+			else:
+				velocity.x =  clamp(velocity.x + (direction.x * ironing_speed * delta), -max_speed, max_speed)
+				velocity.z = clamp(velocity.z + (direction.z * ironing_speed * delta), -max_speed, max_speed)
+				
+		if current_mode == iron_mode.IRONING:
+			if timer.time_left == 0:
+				velocity.x =  clamp(velocity.x + (direction.x * ironing_speed * delta), -max_speed, max_speed)
+				velocity.z = clamp(velocity.z + (direction.z * ironing_speed * delta), -max_speed, max_speed)
+			else:
+				velocity.x = direction.x * waddle_speed
+				velocity.z = direction.z * waddle_speed
 				
 		model.rotation.y = rotate_toward(model.rotation.y, atan2(-velocity.x,-velocity.z), 0.5)
 			
@@ -119,15 +132,15 @@ func _physics_process(delta: float) -> void:
 	if !is_on_floor():
 		velocity.y = velocity.y - (6*delta)
 	elif (!ground_ray.is_colliding()):
-		var nl = left_ray.get_collision_normal() if left_ray.is_colliding() else Vector3.UP
-		var nr = right_ray.get_collision_normal() if right_ray.is_colliding() else Vector3.UP
-		
+		var nl = Vector3.UP
+		var nr =  Vector3.UP
+		self.rotation.z = 0
 		var n = ((nr + nr) / 2.0).normalized()
 		var xform = align_with_y(global_transform, n)
 		transform = transform.interpolate_with(xform, 0.4)
 		
 	# If either side is in the air, align to slope.
-	if (front_ray.is_colliding() or rear_ray.is_colliding()):
+	if (front_ray.is_colliding() or rear_ray.is_colliding()) and self.is_on_floor():
 		if ((ground_ray.is_colliding() and !self.is_on_floor()) or ramp_ray.is_colliding()): 
 			# If one side is in air, move it do
 			var nr = rear_ray.get_collision_normal() if rear_ray.is_colliding() else ground_ray.get_collision_normal()
@@ -143,6 +156,7 @@ func _physics_process(delta: float) -> void:
 			transform = transform.interpolate_with(xform, 0.4)
 		
 	move_and_slide()
+
 func align_with_y(xform, new_y):
 	xform.basis.y = new_y
 	xform.basis.x = -xform.basis.z.cross(new_y)
