@@ -21,13 +21,6 @@ billboard_mode = 1
 material = SubResource("StandardMaterial3D_7de08")
 size = Vector2(0.05, 0.05)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_ia1lp"]
-size = Vector3(0.400635, 0.158081, 0.844727)
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ia1lp"]
-radius = 0.251839
-height = 1.01565
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4gd36"]
 resource_name = "ND_ID_MAT_WHITE"
 cull_mode = 2
@@ -347,6 +340,13 @@ states/Waddle/position = Vector2(554.777, 274.999)
 transitions = ["Start", "Idle_Up", SubResource("AnimationNodeStateMachineTransition_sasra"), "Idle_Down", "Going Up", SubResource("AnimationNodeStateMachineTransition_7cbxl"), "Going Up", "Idle_Up", SubResource("AnimationNodeStateMachineTransition_8pr8v"), "Idle_Up", "Going Down", SubResource("AnimationNodeStateMachineTransition_buypi"), "Going Down", "Idle_Down", SubResource("AnimationNodeStateMachineTransition_njel3"), "Waddle", "Going Down", SubResource("AnimationNodeStateMachineTransition_coq8p"), "Idle_Up", "Waddle", SubResource("AnimationNodeStateMachineTransition_2nij2"), "Waddle", "Idle_Up", SubResource("AnimationNodeStateMachineTransition_vr1i5"), "Going Down", "Going Up", SubResource("AnimationNodeStateMachineTransition_7de08"), "Going Up", "Going Down", SubResource("AnimationNodeStateMachineTransition_ikjww")]
 graph_offset = Vector2(-455.5, 35)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_7de08"]
+radius = 0.4
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7de08"]
+radius = 0.308645
+height = 1.04488
+
 [node name="Character_Iron" type="CharacterBody3D"]
 script = ExtResource("1_mkvct")
 
@@ -363,78 +363,82 @@ visibility_aabb = AABB(-1, -1, -1, 2, 2, 2)
 process_material = SubResource("ParticleProcessMaterial_7de08")
 draw_pass_1 = SubResource("QuadMesh_7de08")
 
-[node name="CollisionBottom" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0.0790624, -0.0103748)
-shape = SubResource("BoxShape3D_ia1lp")
-
-[node name="FrontRay" type="RayCast3D" parent="CollisionBottom"]
-transform = Transform3D(1, 0, 0, 0, -1, -1.50995e-07, 0, 1.50995e-07, -1, 0, 0.068115, 0.410277)
+[node name="GroundRay" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0110624, -0.0103748)
 target_position = Vector3(0, -0.25, 0)
 
-[node name="RearRay" type="RayCast3D" parent="CollisionBottom"]
-transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0.068115, -0.409737)
-target_position = Vector3(0, -0.25, 0)
+[node name="UpRay" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0239416, -0.0103748)
+target_position = Vector3(0, 1, 0)
 
-[node name="GroundRay" type="RayCast3D" parent="CollisionBottom"]
-transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0.0551208, 8.3819e-09)
+[node name="CharacterPivot" type="Node3D" parent="."]
 
-[node name="RampRay" type="RayCast3D" parent="CollisionBottom"]
-transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, -0.0738773, 0.429307)
-target_position = Vector3(0, -1, -1)
-
-[node name="LeftRay" type="RayCast3D" parent="CollisionBottom"]
-transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, -0.194925, -0.000191733, 1.30385e-08)
-target_position = Vector3(-1, 0, 0)
-
-[node name="RightRay" type="RayCast3D" parent="CollisionBottom"]
-transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0.197446, -0.000191733, 1.30385e-08)
-target_position = Vector3(1, 0, 0)
-
-[node name="CollisionTop" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.357525, -0.0134926)
-shape = SubResource("CapsuleShape3D_ia1lp")
-
-[node name="Iron" type="Node3D" parent="."]
+[node name="Iron" type="Node3D" parent="CharacterPivot"]
 script = ExtResource("2_ikjww")
 
-[node name="Armature" type="Node3D" parent="Iron"]
+[node name="Armature" type="Node3D" parent="CharacterPivot/Iron"]
 
-[node name="Skeleton3D" type="Skeleton3D" parent="Iron/Armature"]
+[node name="Skeleton3D" type="Skeleton3D" parent="CharacterPivot/Iron/Armature"]
 bones/0/name = "Base_2"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0.00012122, 0.000336258, -0.000278227, -0.326605, 0.945161, 0.000224396, -0.945161, -0.326605, 0.00025577, 0.347605, 0.516538)
 bones/0/enabled = true
-bones/0/position = Vector3(0.00025577, 0.000137955, -0.00120032)
-bones/0/rotation = Quaternion(0.0457205, 0.000170724, -5.28597e-05, 0.998954)
+bones/0/position = Vector3(0.00025577, 0.347605, 0.516538)
+bones/0/rotation = Quaternion(-0.814434, 4.81952e-05, -0.000172099, 0.580256)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Button"
 bones/1/parent = 0
 bones/1/rest = Transform3D(0.995384, -0.000458166, 0.0959706, 0.0905516, -0.326817, -0.940739, 0.0317958, 0.945087, -0.325267, -6.91892e-05, 0.627705, 0.212109)
 bones/1/enabled = true
-bones/1/position = Vector3(-6.91931e-05, 0.627705, 0.212109)
+bones/1/position = Vector3(-6.33584e-05, 0.634493, 0.191952)
 bones/1/rotation = Quaternion(0.813552, 0.0276852, 0.0392619, 0.579504)
 bones/1/scale = Vector3(1, 1, 1)
 
-[node name="Base" type="MeshInstance3D" parent="Iron/Armature/Skeleton3D"]
+[node name="Base" type="MeshInstance3D" parent="CharacterPivot/Iron/Armature/Skeleton3D"]
 mesh = SubResource("ArrayMesh_q8v0g")
 skin = SubResource("Skin_1ydmh")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Iron"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterPivot/Iron"]
 libraries = {
 &"": SubResource("AnimationLibrary_yacfv")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="Iron"]
+[node name="AnimationTree" type="AnimationTree" parent="CharacterPivot/Iron"]
 tree_root = SubResource("AnimationNodeStateMachine_uhqqe")
-advance_expression_base_node = NodePath("../..")
+advance_expression_base_node = NodePath("../../..")
 anim_player = NodePath("../AnimationPlayer")
 
-[node name="Pivot" type="Node3D" parent="."]
+[node name="FrontRay" type="RayCast3D" parent="CharacterPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 6.35722e-08, 0, -6.35722e-08, 1, 0, 0.0109474, -0.420652)
+target_position = Vector3(0, -0.25, 0)
+
+[node name="RearRay" type="RayCast3D" parent="CharacterPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0109474, 0.399362)
+target_position = Vector3(0, -0.25, 0)
+
+[node name="LeftRay" type="RayCast3D" parent="CharacterPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.194925, 0.0792541, -0.0103748)
+target_position = Vector3(-0.5, 0, 0)
+
+[node name="RightRay" type="RayCast3D" parent="CharacterPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.197446, 0.0792541, -0.0103748)
+target_position = Vector3(0.5, 0, 0)
+
+[node name="CollisionIroning" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0.4025, -0.00220372)
+shape = SubResource("SphereShape3D_7de08")
+disabled = true
+
+[node name="CameraPivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 2.13163e-14, 0, 1, 0, -2.13163e-14, 0, 1, 0, 0, 0)
 script = ExtResource("2_7de08")
 
-[node name="Camera3D" type="Camera3D" parent="Pivot"]
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 1.48724, 2.1712)
 
 [node name="CooldownTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="CollisionStanding" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.516602, 0.00371686)
+shape = SubResource("CapsuleShape3D_7de08")

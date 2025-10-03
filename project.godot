@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="picking up steam"
-config/tags=PackedStringArray("3d", "platform")
+config/tags=PackedStringArray("3d", "plataformer")
 run/main_scene="uid://ctpgitiggqlv0"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
