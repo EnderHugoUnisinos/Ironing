@@ -383,14 +383,14 @@ bones/0/name = "Base_2"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0.00012122, 0.000336258, -0.000278227, -0.326605, 0.945161, 0.000224396, -0.945161, -0.326605, 0.00025577, 0.347605, 0.516538)
 bones/0/enabled = true
-bones/0/position = Vector3(0.00025577, 0.347605, 0.516538)
-bones/0/rotation = Quaternion(-0.814434, 4.81952e-05, -0.000172099, 0.580256)
+bones/0/position = Vector3(0.00025577, 0.000137955, -0.00120032)
+bones/0/rotation = Quaternion(0.0457205, 0.000170724, -5.28597e-05, 0.998954)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Button"
 bones/1/parent = 0
 bones/1/rest = Transform3D(0.995384, -0.000458166, 0.0959706, 0.0905516, -0.326817, -0.940739, 0.0317958, 0.945087, -0.325267, -6.91892e-05, 0.627705, 0.212109)
 bones/1/enabled = true
-bones/1/position = Vector3(-6.33584e-05, 0.634493, 0.191952)
+bones/1/position = Vector3(-6.91931e-05, 0.627705, 0.212109)
 bones/1/rotation = Quaternion(0.813552, 0.0276852, 0.0392619, 0.579504)
 bones/1/scale = Vector3(1, 1, 1)
 

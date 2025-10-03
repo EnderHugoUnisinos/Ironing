@@ -80,8 +80,8 @@ func _physics_process(delta: float) -> void:
 		var cam_forward := -cam_transform.z
 		var cam_right := cam_transform.x
 		
-		cam_forward = cam_forward.slide(last_floor_normal).normalized()
-		cam_right = cam_right.slide(last_floor_normal).normalized()
+		cam_forward = cam_forward.slide(last_floor_normal.normalized()).normalized()
+		cam_right = cam_right.slide(last_floor_normal.normalized()).normalized()
 
 		var direction := (cam_forward * input_vec.y) + (cam_right * input_vec.x)
 		direction = direction.slide(last_floor_normal)
