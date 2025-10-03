@@ -1,7 +1,7 @@
 extends MovementBase
 
 @export var waddle_speed: float = 1.0
-@export var ironing_speed: float = 10.0
+@export var ironing_speed: float = 15.0
 @export var max_speed: float = 15.0
 @export var standing_jump_height: float = 4.0
 @export var ironing_jump_height: float = 5.0
@@ -10,7 +10,7 @@ extends MovementBase
 
 @onready var camera: Camera3D = $CameraPivot/Camera3D
 @onready var timer: Timer = $CooldownTimer
-@onready var camera_pivot = $CameraPivot
+#@onready var camera_pivot = $CameraPivot
 @onready var character_pivot = $CharacterPivot
 #@onready var model = $CharacterPivot/Iron
 @onready var collision_ironing = $CollisionIroning
@@ -66,6 +66,8 @@ func _process(delta: float) -> void:
 			switch_mode(iron_mode.STANDING)
 
 func _physics_process(delta: float) -> void:
+	if last_floor_normal == Vector3.ZERO:
+		last_floor_normal = Vector3.UP.normalized()
 	var input_vec := Vector2(
 		Input.get_action_strength("right") - Input.get_action_strength("left"),
 		Input.get_action_strength("forward") - Input.get_action_strength("backward")
@@ -88,12 +90,17 @@ func _physics_process(delta: float) -> void:
 		#direction.y += 0.1
 		if (current_mode == iron_mode.STANDING and (timer.time_left == 0)) or (current_mode == iron_mode.IRONING and !(timer.time_left == 0)):
 			velocity.x = direction.x * waddle_speed
-			velocity.y = direction.y * waddle_speed
+			velocity.y = direction.y * waddle_speed + velocity.y
 			velocity.z = direction.z * waddle_speed
 		if (current_mode == iron_mode.IRONING and (timer.time_left == 0)) or (current_mode == iron_mode.STANDING and !(timer.time_left == 0)):
-			velocity.x =  clamp(velocity.x + (direction.x * ironing_speed * delta), -max_speed, max_speed)
+			#velocity.x =  direction.x * ironing_speed
+			#velocity.x = clamp(velocity.x + (direction.x * ironing_speed * delta)*20, -ironing_speed, ironing_speed)
+			#velocity.y =  clamp(velocity.y + (direction.y * ironing_speed * delta * 5), -max_speed, max_speed)
+			#velocity.z = clamp(velocity.z + (direction.z * ironing_speed * delta)*20, -ironing_speed, ironing_speed)
+			velocity.x = move_toward(velocity.x, direction.x*ironing_speed, (ironing_speed * delta)+abs(direction.x)*delta*10)
 			velocity.y =  clamp(velocity.y + (direction.y * ironing_speed * delta * 5), -max_speed, max_speed)
-			velocity.z = clamp(velocity.z + (direction.z * ironing_speed * delta), -max_speed, max_speed)
+			velocity.z = move_toward(velocity.z, direction.z*ironing_speed, (ironing_speed * delta)+abs(direction.z)*delta*10)
+			#velocity.z = direction.z * ironing_speed
 			
 		character_pivot.rotation.y = rotate_toward(character_pivot.rotation.y, atan2(-velocity.x,-velocity.z), 0.5)
 		if timer.time_left > 0:
@@ -120,33 +127,24 @@ func _physics_process(delta: float) -> void:
 		jumping = true
 	##Gravity
 	if !is_on_floor():
-		velocity.y = velocity.y - (9.2*delta)
-	#if (!ground_ray.is_colliding()):
-		#var nl = Vector3.UP
-		#var nr =  Vector3.UP
-		#var n = ((nr + nr) / 2.0).normalized()
-		#var xform = align_with_y(global_transform, n)
-		#transform = transform.interpolate_with(xform, 0.4)
+		velocity.y = velocity.y - (11.2*delta)
+	if !self.is_on_floor():
+		var n = Vector3.UP.normalized()
+		var xform = align_with_y(character_pivot.transform, n)
+		character_pivot.transform = character_pivot.transform.interpolate_with(xform, 0.01)
 		
-	# If either side is in the air, align to slope.
-	if (front_ray.is_colliding() or rear_ray.is_colliding()) and self.is_on_floor():
+	if self.is_on_floor():
 		if ground_ray.is_colliding():
-			## If one side is in air, move it do
-			#var nr = rear_ray.get_collision_normal() if rear_ray.is_colliding() else ground_ray.get_collision_normal()
-			#var nf = front_ray.get_collision_normal() if front_ray.is_colliding() else ground_ray.get_collision_normal()
-		#
-			#var n = ((nr + nf) / 2.0).normalized()
 			var n = ground_ray.get_collision_normal().normalized()
 			var xform = align_with_y(character_pivot.transform, n)
 			character_pivot.transform = character_pivot.transform.interpolate_with(xform, 0.4)
 			
 	if ground_ray.is_colliding():
-		last_floor_normal = ground_ray.get_collision_normal().normalized()
+		last_floor_normal = get_floor_normal().normalized()
 	if !is_on_floor():
 		last_floor_normal.x = move_toward(last_floor_normal.x, 0, ((9.2)*delta))
 		last_floor_normal.y = move_toward(last_floor_normal.y, 1, ((9.2)*delta))
 		last_floor_normal.z = move_toward(last_floor_normal.z, 0, ((9.2)*delta))
 		last_floor_normal = last_floor_normal.normalized()
-	
 	floor_snap_length = 0.5
 	move_and_slide()

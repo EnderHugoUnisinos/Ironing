@@ -30,7 +30,7 @@ transform = Transform3D(0.0550316, 0.604609, -0.794619, -0.0115444, 0.796157, 0.
 shadow_enabled = true
 
 [node name="Character_Iron" parent="." groups=["player"] instance=ExtResource("2_nd71p")]
-transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 0, 7.37019, 12.0263)
+transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 0, 7.20577, 12.0263)
 
 [node name="level_test" parent="." instance=ExtResource("2_j8ivh")]
 
