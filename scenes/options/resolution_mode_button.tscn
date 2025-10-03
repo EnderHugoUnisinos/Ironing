@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7cfxav6ix40f"]
+
+[ext_resource type="PackedScene" uid="uid://na0sapkjsvu5" path="res://scenes/options/options_display_button.tscn" id="1_t25ko"]
+[ext_resource type="Script" uid="uid://c32plxd4uljdl" path="res://scripts/options/resolution_mode_button.gd" id="2_68wn3"]
+
+[node name="Resolution_Mode_Button" instance=ExtResource("1_t25ko")]
+script = ExtResource("2_68wn3")
+
+[node name="Label" parent="HBoxContainer" index="0"]
+theme_override_colors/font_color = Color(0.750926, 0.420421, 0.156989, 1)
+
+[connection signal="item_selected" from="HBoxContainer/OptionButton" to="." method="_on_option_button_item_selected"]

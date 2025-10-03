@@ -1,0 +1,69 @@
+[gd_scene load_steps=8 format=3 uid="uid://cdnidtwl2kg4i"]
+
+[ext_resource type="Script" uid="uid://dxyugku6w5ygg" path="res://scripts/options/hotkey_rebind_button.gd" id="1_ijtsw"]
+[ext_resource type="FontFile" uid="uid://b2pl8ephfxo3p" path="res://assets/Fonts/pixel_rpg.ttf" id="2_gyo21"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ywgsv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gyo21"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_414oy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_diodr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dadil"]
+
+[node name="Hotkey_Rebind_Button" type="Control" groups=["hotkey_button"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ijtsw")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(120, 25)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.750926, 0.420421, 0.156989, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("2_gyo21")
+theme_override_font_sizes/font_size = 23
+text = "Action"
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 80
+theme_override_styles/separator = SubResource("StyleBoxEmpty_ywgsv")
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(100, 20)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.751598, 0.132783, 0.341816, 1)
+theme_override_colors/font_hover_color = Color(0.47201, 0.0567509, 0.201454, 1)
+theme_override_colors/font_color = Color(0.2366, 0.416173, 0.91, 1)
+theme_override_colors/font_focus_color = Color(0.177555, 0.31127, 0.678331, 1)
+theme_override_colors/font_pressed_color = Color(0.751598, 0.132783, 0.341816, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("2_gyo21")
+theme_override_font_sizes/font_size = 23
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_gyo21")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_414oy")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_diodr")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_dadil")
+toggle_mode = true
+text = "Action_key"
+
+[connection signal="toggled" from="HBoxContainer/Button" to="." method="_on_button_toggled"]

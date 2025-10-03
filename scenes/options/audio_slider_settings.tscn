@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvq22u1asak8s"]
+
+[ext_resource type="Script" uid="uid://cksfk2gt0odtk" path="res://scripts/options/audio_slider_settings.gd" id="1_bm1pd"]
+[ext_resource type="FontFile" uid="uid://b2pl8ephfxo3p" path="res://assets/Fonts/pixel_rpg.ttf" id="2_i7w2s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k3kui"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tkynn"]
+
+[node name="Audio_Slider_Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bm1pd")
+bus_name = "Master"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 40
+
+[node name="Audio_Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.74902, 0.419608, 0.156863, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("2_i7w2s")
+text = "Master"
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_k3kui")
+
+[node name="HSlider" type="HSlider" parent="HBoxContainer"]
+custom_minimum_size = Vector2(100, 20)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.001
+
+[node name="VSeparator2" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_tkynn")
+
+[node name="Value_Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.74902, 0.419608, 0.156863, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("2_i7w2s")
+text = "80"
+
+[connection signal="value_changed" from="HBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]

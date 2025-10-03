@@ -1,0 +1,288 @@
+[gd_scene load_steps=17 format=3 uid="uid://bcpqjncy5w73y"]
+
+[ext_resource type="Texture2D" uid="uid://cho3gq4xvlipx" path="res://assets/textures/PUS-Menu-V001.png" id="1_m303k"]
+[ext_resource type="Script" uid="uid://bvmerb6yii061" path="res://scripts/options/menu_container.gd" id="1_n6my6"]
+[ext_resource type="FontFile" uid="uid://b2pl8ephfxo3p" path="res://assets/Fonts/pixel_rpg.ttf" id="2_n6my6"]
+[ext_resource type="PackedScene" uid="uid://dv3vbsirhr0io" path="res://scenes/options/option_container.tscn" id="4_5p46w"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5p46w"]
+texture = ExtResource("1_m303k")
+modulate_color = Color(0.856067, 0.856067, 0.856067, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dagwu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_h8tl8"]
+font_size = 8
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h8tl8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gq0b1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m303k"]
+bg_color = Color(0.189863, 0.456189, 0.776465, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n6my6"]
+bg_color = Color(0.42, 0.42, 0.42, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+anti_aliasing = false
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dagwu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m303k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n6my6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5p46w"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j3s0m"]
+
+[node name="Menu Container" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_n6my6")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.226707, 0.226708, 0.226707, 1)
+metadata/_edit_lock_ = true
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 228.0
+offset_top = -37.0
+offset_right = 540.0
+offset_bottom = 326.0
+scale = Vector2(2, 2)
+theme_override_styles/panel = SubResource("StyleBoxTexture_5p46w")
+metadata/_edit_lock_ = true
+
+[node name="Main_Menu" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -178.0
+offset_top = -191.0
+offset_right = 8.0
+offset_bottom = 231.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.00872665
+theme_override_styles/panel = SubResource("StyleBoxTexture_dagwu")
+
+[node name="MarginContainer" type="MarginContainer" parent="Main_Menu"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main_Menu/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Main_Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Bopis The Bar"
+
+[node name="Label2" type="Label" parent="Main_Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.489622, 0.489622, 0.489622, 1)
+theme_override_font_sizes/font_size = 7
+text = "Bipis
+"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Main_Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Main_Menu/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Metic
+"
+label_settings = SubResource("LabelSettings_h8tl8")
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="Main_Menu/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_h8tl8")
+
+[node name="ProgressBar" type="ProgressBar" parent="Main_Menu/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxEmpty_gq0b1")
+theme_override_styles/fill = SubResource("StyleBoxFlat_m303k")
+value = 25.0
+fill_mode = 1
+show_percentage = false
+
+[node name="Label2" type="Label" parent="Main_Menu/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Metic
+"
+label_settings = SubResource("LabelSettings_h8tl8")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Main_Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Main_Menu/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Metic
+"
+label_settings = SubResource("LabelSettings_h8tl8")
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="Main_Menu/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_h8tl8")
+
+[node name="ProgressBar" type="ProgressBar" parent="Main_Menu/MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxEmpty_gq0b1")
+theme_override_styles/fill = SubResource("StyleBoxFlat_m303k")
+value = 15.0
+fill_mode = 1
+show_percentage = false
+
+[node name="Label2" type="Label" parent="Main_Menu/MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Metic
+"
+label_settings = SubResource("LabelSettings_h8tl8")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Main_Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_n6my6")
+text = "Waowi
+"
+
+[node name="MenuMargins" type="MarginContainer" parent="Main_Menu"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main_Menu/MenuMargins"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 13
+
+[node name="Start_Button" type="Button" parent="Main_Menu/MenuMargins/VBoxContainer"]
+custom_minimum_size = Vector2(150, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "Yelp
+"
+theme_override_colors/font_hover_pressed_color = Color(0.751598, 0.132783, 0.341816, 1)
+theme_override_colors/font_hover_color = Color(0.47201, 0.0567509, 0.201454, 1)
+theme_override_colors/font_color = Color(0.2366, 0.416173, 0.91, 1)
+theme_override_colors/font_focus_color = Color(0.177555, 0.31127, 0.678331, 1)
+theme_override_colors/font_pressed_color = Color(0.751598, 0.132783, 0.341816, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("2_n6my6")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dagwu")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_m303k")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_n6my6")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_5p46w")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_j3s0m")
+text = "Play"
+
+[node name="Options_Button" type="Button" parent="Main_Menu/MenuMargins/VBoxContainer"]
+custom_minimum_size = Vector2(150, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "Yelp
+"
+theme_override_colors/font_hover_pressed_color = Color(0.751598, 0.132783, 0.341816, 1)
+theme_override_colors/font_hover_color = Color(0.47201, 0.0567509, 0.201454, 1)
+theme_override_colors/font_color = Color(0.2366, 0.416173, 0.91, 1)
+theme_override_colors/font_focus_color = Color(0.177555, 0.31127, 0.678331, 1)
+theme_override_colors/font_pressed_color = Color(0.751598, 0.132783, 0.341816, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("2_n6my6")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dagwu")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_m303k")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_n6my6")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_5p46w")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_j3s0m")
+text = "Options
+"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Main_Menu/MenuMargins"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Quit_Button" type="Button" parent="Main_Menu/MenuMargins/VBoxContainer2"]
+custom_minimum_size = Vector2(150, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "Yelp
+"
+theme_override_colors/font_hover_pressed_color = Color(0.751598, 0.132783, 0.341816, 1)
+theme_override_colors/font_hover_color = Color(0.47201, 0.0567509, 0.201454, 1)
+theme_override_colors/font_color = Color(0.2366, 0.416173, 0.91, 1)
+theme_override_colors/font_focus_color = Color(0.177555, 0.31127, 0.678331, 1)
+theme_override_colors/font_pressed_color = Color(0.751598, 0.132783, 0.341816, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("2_n6my6")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dagwu")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_m303k")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_n6my6")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_5p46w")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_j3s0m")
+text = "Quit
+"
+
+[node name="Option_Container" parent="." instance=ExtResource("4_5p46w")]
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="Main_Menu/MenuMargins/VBoxContainer/Start_Button" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Main_Menu/MenuMargins/VBoxContainer/Options_Button" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="Main_Menu/MenuMargins/VBoxContainer2/Quit_Button" to="." method="_on_quit_button_pressed"]
+[connection signal="options_menu_return" from="Option_Container" to="." method="_on_option_container_options_menu_return"]
