@@ -2,7 +2,7 @@ extends Control
 
 
 @onready var option_button: OptionButton = $HBoxContainer/OptionButton as OptionButton
-
+@onready var label: Label = $HBoxContainer/Label as Label
 
 const WINDOW_MODE_ARRAY : Array[String] = [
 	"Fullscreen",
@@ -12,6 +12,7 @@ const WINDOW_MODE_ARRAY : Array[String] = [
 ]
 
 func _ready() -> void:
+	label.text = "Window"
 	add_window_mode_items()
 
 

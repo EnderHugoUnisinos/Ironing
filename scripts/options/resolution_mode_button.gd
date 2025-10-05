@@ -1,8 +1,8 @@
 extends Control
 
 
-
 @onready var option_button: OptionButton = $HBoxContainer/OptionButton as OptionButton
+@onready var label: Label = $HBoxContainer/Label as Label
 
 const RESOLUTION_DICTIONARY : Dictionary = {
 	"1152 x 648" : Vector2i(1152, 648),
@@ -11,6 +11,7 @@ const RESOLUTION_DICTIONARY : Dictionary = {
 }
 
 func _ready() -> void:
+	label.text = "Resolution"
 	add_resolution_size_items()
 
 

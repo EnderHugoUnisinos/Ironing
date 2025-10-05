@@ -1,8 +1,10 @@
-[gd_scene load_steps=39 format=4 uid="uid://cp8242762l2nq"]
+[gd_scene load_steps=43 format=4 uid="uid://cp8242762l2nq"]
 
 [ext_resource type="Script" uid="uid://diqp3b7x3sit7" path="res://scripts/player.gd" id="1_mkvct"]
 [ext_resource type="Script" uid="uid://ihxquk3vhpsl" path="res://scripts/camera_pivot.gd" id="2_7de08"]
 [ext_resource type="Script" uid="uid://dfq3ixu3fvvn6" path="res://objects/rotation.gd" id="2_ikjww"]
+[ext_resource type="Script" uid="uid://bvyat61m0sgej" path="res://scripts/options/open_menu.gd" id="4_ikjww"]
+[ext_resource type="PackedScene" uid="uid://bcpqjncy5w73y" path="res://scenes/options/menu_container.tscn" id="5_leroj"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7de08"]
 emission_shape = 3
@@ -347,6 +349,14 @@ radius = 0.4
 radius = 0.308645
 height = 1.04488
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_leroj"]
+bg_color = Color(0.176419, 0.176419, 0.176419, 0.188235)
+border_blend = true
+anti_aliasing_size = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k660p"]
+bg_color = Color(0.392157, 0.643137, 0.839216, 1)
+
 [node name="Character_Iron" type="CharacterBody3D"]
 script = ExtResource("1_mkvct")
 
@@ -429,6 +439,13 @@ transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0.4
 shape = SubResource("SphereShape3D_7de08")
 disabled = true
 
+[node name="CooldownTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="CollisionStanding" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.516602, 0.00371686)
+shape = SubResource("CapsuleShape3D_7de08")
+
 [node name="CameraPivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 2.13163e-14, 0, 1, 0, -2.13163e-14, 0, 1, 0, 0, 0)
 script = ExtResource("2_7de08")
@@ -436,9 +453,36 @@ script = ExtResource("2_7de08")
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 1.48724, 2.1712)
 
-[node name="CooldownTimer" type="Timer" parent="."]
-one_shot = true
+[node name="Menu" type="Control" parent="."]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_ikjww")
 
-[node name="CollisionStanding" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.516602, 0.00371686)
-shape = SubResource("CapsuleShape3D_7de08")
+[node name="Menu Container" parent="Menu" instance=ExtResource("5_leroj")]
+layout_mode = 1
+offset_right = 1112.0
+offset_bottom = 608.0
+
+[node name="Hud" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="WaterMeter" type="ProgressBar" parent="Hud"]
+layout_mode = 2
+offset_left = 522.0
+offset_top = 520.0
+offset_right = 622.0
+offset_bottom = 620.0
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_leroj")
+theme_override_styles/fill = SubResource("StyleBoxFlat_k660p")
+value = 100.0
+fill_mode = 3

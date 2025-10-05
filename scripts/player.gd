@@ -1,6 +1,6 @@
 extends MovementBase
 
-@export var waddle_speed: float = 1.0
+@export var waddle_speed: float = 2.5
 @export var ironing_speed: float = 15.0
 @export var max_speed: float = 15.0
 @export var standing_jump_height: float = 4.0
@@ -16,35 +16,29 @@ extends MovementBase
 @onready var collision_ironing = $CollisionIroning
 @onready var collision_standing = $CollisionStanding
 @onready var ground_ray = $GroundRay
+@onready var water_meter : ProgressBar = $Hud/WaterMeter
 
 enum iron_mode {STANDING, IRONING}
 var current_mode : iron_mode = iron_mode.STANDING
 var walk = false
 var jumping = false
-var current_speed = 1
+var current_speed = waddle_speed
+var current_jump_height = standing_jump_height
 var last_y_position: float
 var last_floor_normal: Vector3
 var last_floor_point: Vector3
 var last_grounded_velocity: Vector3
+var current_floor_collider: CollisionShape3D
 
 func _ready() -> void:
 	last_y_position = self.global_position.y
-
-func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("lock_mouse"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	if Input.is_action_just_pressed("unlock_mouse"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	if Input.is_action_pressed("reset"):
-		get_parent().get_tree().reload_current_scene()
-	if Input.is_action_pressed("open_menu"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		get_tree().change_scene_to_file("res://scenes/menu_container.tscn")
 
 func switch_mode(switch_mode):
 	if switch_mode == iron_mode.IRONING:
 		timer.start(cooldown)
 		current_mode = iron_mode.IRONING
+		current_speed = ironing_speed
+		current_jump_height = ironing_jump_height
 		walk = false
 		collision_ironing.disabled = false
 		collision_standing.disabled = true
@@ -52,6 +46,8 @@ func switch_mode(switch_mode):
 	elif switch_mode == iron_mode.STANDING :
 		timer.start(cooldown)
 		current_mode = iron_mode.STANDING
+		current_speed = waddle_speed
+		current_jump_height = standing_jump_height
 		collision_ironing.disabled = true
 		collision_standing.disabled = false
 		self.floor_stop_on_slope = true
@@ -77,9 +73,22 @@ func _physics_process(delta: float) -> void:
 	)
 	if is_on_floor():
 		jumping = false
+		#region reset surface changes
+		if current_mode == iron_mode.IRONING:
+			current_speed = ironing_speed
+			current_jump_height = ironing_jump_height
+		else:
+			current_speed = waddle_speed
+			current_jump_height = standing_jump_height
+		#endregion
 	if input_vec.length() > 0:
 		input_vec = input_vec.normalized()
-		
+		if current_floor_collider:
+			if current_floor_collider.get_script():
+				if (current_mode == iron_mode.IRONING and timer.time_left == 0) or (current_mode != iron_mode.IRONING and timer.time_left != 0):
+					current_floor_collider.surface_iron(self)
+				else:
+					current_floor_collider.surface_walk(self)
 		# Get camera basis (direction vectors)
 		var cam_transform := (camera.global_transform.basis)
 		var cam_forward := -cam_transform.z
@@ -96,16 +105,11 @@ func _physics_process(delta: float) -> void:
 			velocity.y = direction.y * waddle_speed + velocity.y
 			velocity.z = direction.z * waddle_speed
 		if (current_mode == iron_mode.IRONING and (timer.time_left == 0)) or (current_mode == iron_mode.STANDING and !(timer.time_left == 0)):
-			#velocity.x =  direction.x * ironing_speed
-			#velocity.x = clamp(velocity.x + (direction.x * ironing_speed * delta)*20, -ironing_speed, ironing_speed)
-			#velocity.y =  clamp(velocity.y + (direction.y * ironing_speed * delta * 5), -max_speed, max_speed)
-			#velocity.z = clamp(velocity.z + (direction.z * ironing_speed * delta)*20, -ironing_speed, ironing_speed)
-			velocity.x = move_toward(velocity.x, direction.x*ironing_speed, (ironing_speed * delta)+abs(direction.x)*delta*10)
-			velocity.y =  clamp(velocity.y + (direction.y * ironing_speed * delta * 5), -max_speed, max_speed)
-			velocity.z = move_toward(velocity.z, direction.z*ironing_speed, (ironing_speed * delta)+abs(direction.z)*delta*10)
-			#velocity.z = direction.z * ironing_speed
+			velocity.x = move_toward(velocity.x, direction.x*current_speed, (current_speed * delta)+abs(direction.x)*delta*10)
+			velocity.y =  clamp(velocity.y + (direction.y * current_speed * delta * 5), -max_speed, max_speed)
+			velocity.z = move_toward(velocity.z, direction.z*current_speed, (current_speed * delta)+abs(direction.z)*delta*10)
 			
-		character_pivot.rotation.y = rotate_toward(character_pivot.rotation.y, atan2(-velocity.x,-velocity.z), 0.5)
+		character_pivot.rotation.y = rotate_toward(character_pivot.rotation.y, atan2(-velocity.x,-velocity.z)+(randf()*0.02), 0.5)
 		if timer.time_left > 0:
 			velocity.x = move_toward(velocity.x, 0, 0.02)
 			velocity.z = move_toward(velocity.z, 0, 0.02)
@@ -120,13 +124,12 @@ func _physics_process(delta: float) -> void:
 			velocity -= velocity * min(delta/0.9, 1.0)
 	
 	if Input.is_action_just_pressed("jump") and !jumping:
-		var jump_height: float
+		if current_floor_collider:
+			if current_floor_collider.get_script():
+				current_floor_collider.surface_jump(self)
 		if current_mode == iron_mode.IRONING:
-			jump_height = ironing_jump_height
 			$GPUParticles3D.restart()
-		else:
-			jump_height = standing_jump_height
-		self.velocity.y = jump_height
+		self.velocity.y = current_jump_height
 		jumping = true
 	##Gravity
 	if !is_on_floor():
@@ -140,10 +143,13 @@ func _physics_process(delta: float) -> void:
 		if ground_ray.is_colliding():
 			var n = ground_ray.get_collision_normal().normalized()
 			var xform = align_with_y(character_pivot.transform, n)
-			character_pivot.transform = character_pivot.transform.interpolate_with(xform, 0.4)
-			
+			character_pivot.transform = character_pivot.transform.interpolate_with(xform, 0.4)	
 	if ground_ray.is_colliding():
 		last_floor_normal = get_floor_normal().normalized()
+		var target = ground_ray.get_collider()
+		var shape_id = ground_ray.get_collider_shape()
+		current_floor_collider = target.shape_owner_get_owner(shape_id)
+		
 	if !is_on_floor():
 		last_floor_normal.x = move_toward(last_floor_normal.x, 0, ((9.2)*delta))
 		last_floor_normal.y = move_toward(last_floor_normal.y, 1, ((9.2)*delta))
