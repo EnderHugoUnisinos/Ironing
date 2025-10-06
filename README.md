@@ -1,14 +1,14 @@
-A Todo Vapor !
+# A Todo Vapor ! <br/> 
+<br/> 
+Chegue até o fim de cada nivel o mais rapido o possivel, <br/> 
+No momento temos (1) nivel implementado: a sala de estar. <br/> 
 
-Chegue até o fim de cada nivel o mais rapido o possivel
-No momento só temos (1) nivel implementado: a sala de estar
+  Controles padrão (teclado) <br/> 
+WASD         : Movimento <br/> 
+Espaço       : Pulo <br/> 
+Shift (hold) : Passar <br/> 
 
-  Controles padrão (teclado)
-WASD         : Movimento
-Espaço       : Pulo
-Shift (hold) : Passar
-
-  Controles padrão (controle)
-Joystick     : Movimento
-A            : Pulo
-RT (hold)    : Passar
+  Controles padrão (controle) <br/> 
+Joystick     : Movimento <br/> 
+A            : Pulo <br/> 
+RT (hold)    : Passar <br/> 
