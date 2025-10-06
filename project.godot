@@ -12,7 +12,7 @@ config_version=5
 
 config/name="picking up steam"
 config/tags=PackedStringArray("3d", "plataformer")
-run/main_scene="uid://dh1ifa6afj02n"
+run/main_scene="uid://1leop00d28at"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 

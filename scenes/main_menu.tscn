@@ -1,7 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://1leop00d28at"]
+[gd_scene load_steps=18 format=3 uid="uid://1leop00d28at"]
 
+[ext_resource type="Script" uid="uid://6radik61hocj" path="res://scenes/main_menu.gd" id="1_8ln24"]
 [ext_resource type="Texture2D" uid="uid://kpvpa4pqdbao" path="res://assets/images/menu_art.png" id="1_l6cm7"]
 [ext_resource type="FontFile" uid="uid://b2pl8ephfxo3p" path="res://assets/fonts/pixel_rpg.ttf" id="2_ekxnf"]
+[ext_resource type="PackedScene" uid="uid://bx3tvo04373em" path="res://scenes/menus/level_choice.tscn" id="3_bqqt6"]
+[ext_resource type="Script" uid="uid://405e344ekxck" path="res://scenes/start_button.gd" id="3_wu84c"]
+[ext_resource type="Script" uid="uid://xad0cymbtiou" path="res://scenes/options_button.gd" id="5_oa1go"]
+[ext_resource type="Script" uid="uid://bivbamyev83ha" path="res://scenes/quit_button.gd" id="6_tbmy8"]
+[ext_resource type="Script" uid="uid://chr3destdkxwj" path="res://scenes/options.gd" id="8_jk1qb"]
+[ext_resource type="PackedScene" uid="uid://dv3vbsirhr0io" path="res://scenes/options/option_container.tscn" id="8_tbmy8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bqqt6"]
 
@@ -13,6 +20,16 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oa1go"]
 
+[sub_resource type="Gradient" id="Gradient_tbmy8"]
+colors = PackedColorArray(0, 0, 0, 0.266667, 0, 0, 0, 0.572549)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hb30k"]
+gradient = SubResource("Gradient_tbmy8")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tbmy8"]
+texture = SubResource("GradientTexture2D_hb30k")
+modulate_color = Color(0.856067, 0.856067, 0.856067, 1)
+
 [node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -20,6 +37,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_8ln24")
 
 [node name="MenuArt" type="Sprite2D" parent="."]
 position = Vector2(580, 326)
@@ -33,7 +51,7 @@ offset_top = 363.0
 offset_right = 465.0
 offset_bottom = 604.0
 rotation = 0.646451
-color = Color(0, 0, 0, 0.356863)
+color = Color(0, 0.796078, 0.862745, 0.286275)
 
 [node name="start_button" type="Button" parent="."]
 custom_minimum_size = Vector2(150, 25)
@@ -60,6 +78,7 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_8ln24")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_rtw2f")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_oa1go")
 text = "Play"
+script = ExtResource("3_wu84c")
 
 [node name="options_button" type="Button" parent="."]
 custom_minimum_size = Vector2(150, 25)
@@ -86,6 +105,7 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_8ln24")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_rtw2f")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_oa1go")
 text = "Options"
+script = ExtResource("5_oa1go")
 
 [node name="quit_button" type="Button" parent="."]
 custom_minimum_size = Vector2(150, 25)
@@ -112,6 +132,7 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_8ln24")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_rtw2f")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_oa1go")
 text = "Quit"
+script = ExtResource("6_tbmy8")
 
 [node name="title_label" type="Label" parent="."]
 layout_mode = 0
@@ -125,3 +146,37 @@ theme_override_constants/shadow_offset_y = 5
 theme_override_fonts/font = ExtResource("2_ekxnf")
 theme_override_font_sizes/font_size = 60
 text = "A Todo Vapor"
+
+[node name="Level_Choice" parent="." instance=ExtResource("3_bqqt6")]
+visible = false
+layout_mode = 1
+offset_left = -5.0
+offset_top = -10.0
+offset_right = 25.0
+offset_bottom = 20.0
+
+[node name="Options" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("8_jk1qb")
+
+[node name="Panel" type="Panel" parent="Options"]
+offset_left = 339.0
+offset_top = 117.0
+offset_right = 557.0
+offset_bottom = 353.0
+scale = Vector2(2, 2)
+theme_override_styles/panel = SubResource("StyleBoxTexture_tbmy8")
+
+[node name="Option_Container" parent="Options" instance=ExtResource("8_tbmy8")]
+layout_mode = 1
+offset_left = -2.0
+offset_right = 1116.0
+offset_bottom = 608.0
+
+[connection signal="pressed" from="start_button" to="start_button" method="_on_pressed"]
+[connection signal="pressed" from="options_button" to="options_button" method="_on_pressed"]
+[connection signal="pressed" from="quit_button" to="quit_button" method="_on_pressed"]
+[connection signal="options_menu_return" from="Options/Option_Container" to="Options" method="_on_option_container_options_menu_return"]

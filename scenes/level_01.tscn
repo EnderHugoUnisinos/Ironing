@@ -99,5 +99,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0738792, 0.530494, -0.0095
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 
 [node name="EndDetect" parent="." instance=ExtResource("4_nr3cb")]
-transform = Transform3D(1.6, 0, 0, 0, 1, 0, 0, 0, 1.6, 61.33, 5.26171, 27.2938)
+transform = Transform3D(1.6, 0, 0, 0, 1.6, 0, 0, 0, 1.6, 61.33, 5.26171, 27.2938)
 next_level = "uid://1leop00d28at"

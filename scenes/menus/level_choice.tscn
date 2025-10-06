@@ -1,0 +1,80 @@
+[gd_scene load_steps=6 format=3 uid="uid://bx3tvo04373em"]
+
+[ext_resource type="Script" uid="uid://b8erwmy5y55m2" path="res://scenes/menus/level_choice.gd" id="1_y14y6"]
+[ext_resource type="FontFile" uid="uid://b2pl8ephfxo3p" path="res://assets/fonts/pixel_rpg.ttf" id="2_ibtfw"]
+[ext_resource type="Texture2D" uid="uid://iusvqri6j8a5" path="res://assets/images/level_01.png" id="3_y14y6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y14y6"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cii0b"]
+texture = ExtResource("3_y14y6")
+
+[node name="Level_Choice" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_y14y6")
+level_path = "res://scenes/level_01.tscn"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 1190.0
+offset_bottom = 680.0
+color = Color(0, 0, 0, 0.266667)
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = -131.0
+offset_right = 73.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -148.0
+offset_right = 100.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 9
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.176471, 0.309804, 0.678431, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("2_ibtfw")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxEmpty_y14y6")
+text = "Level"
+
+[node name="Panel" type="Panel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_cii0b")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
