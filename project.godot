@@ -12,9 +12,15 @@ config_version=5
 
 config/name="picking up steam"
 config/tags=PackedStringArray("3d", "plataformer")
-run/main_scene="uid://ctpgitiggqlv0"
+run/main_scene="uid://bcpqjncy5w73y"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+SettingsSignals="*res://scripts/autoload/SettingsSignals.gd"
+SettingsData="*res://scripts/autoload/SettingsData.gd"
+SaveManager="*res://scripts/autoload/SaveManager.gd"
 
 [editor]
 

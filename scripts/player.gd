@@ -39,7 +39,7 @@ func _input(event: InputEvent) -> void:
 		get_parent().get_tree().reload_current_scene()
 	if Input.is_action_pressed("open_menu"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		get_tree().change_scene_to_file("res://scenes/menu_container.tscn")
+		get_tree().change_scene_to_file("res://scenes/menus/menu_container.tscn")
 
 func switch_mode(switch_mode):
 	if switch_mode == iron_mode.IRONING:

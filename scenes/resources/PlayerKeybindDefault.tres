@@ -1,0 +1,47 @@
+[gd_resource type="Resource" script_class="PlayerKeybindResource" load_steps=9 format=3 uid="uid://bw7t5lv8may2c"]
+
+[ext_resource type="Script" uid="uid://cffnrlv3ndm1u" path="res://scenes/resources/PlayerKeybindResource.gd" id="1_eeymk"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_eeymk"]
+device = -1
+keycode = 83
+unicode = 115
+
+[sub_resource type="InputEventKey" id="InputEventKey_0mbpj"]
+device = -1
+keycode = 87
+unicode = 119
+
+[sub_resource type="InputEventKey" id="InputEventKey_03615"]
+device = -1
+keycode = 32
+unicode = 32
+
+[sub_resource type="InputEventKey" id="InputEventKey_dr8dd"]
+device = -1
+keycode = 65
+unicode = 97
+
+[sub_resource type="InputEventKey" id="InputEventKey_sy0rq"]
+device = -1
+keycode = 4194336
+
+[sub_resource type="InputEventKey" id="InputEventKey_ihpnn"]
+device = -1
+keycode = 68
+unicode = 100
+
+[sub_resource type="InputEventKey" id="InputEventKey_wii24"]
+device = -1
+keycode = 4194325
+
+[resource]
+script = ExtResource("1_eeymk")
+DEFAULT_FORWARD = SubResource("InputEventKey_0mbpj")
+DEFAULT_BACKWARD = SubResource("InputEventKey_eeymk")
+DEFAULT_LEFT = SubResource("InputEventKey_dr8dd")
+DEFAULT_RIGHT = SubResource("InputEventKey_ihpnn")
+DEFAULT_SPECIAL = SubResource("InputEventKey_wii24")
+DEFAULT_JUMP = SubResource("InputEventKey_03615")
+DEFAULT_RESET = SubResource("InputEventKey_sy0rq")
+metadata/_custom_type_script = "uid://cffnrlv3ndm1u"

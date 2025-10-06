@@ -12,7 +12,11 @@ const RESOLUTION_DICTIONARY : Dictionary = {
 
 func _ready() -> void:
 	add_resolution_size_items()
+	load_data()
 
+func load_data() -> void:
+	_on_option_button_item_selected(SettingsData.get_resolution())
+	option_button.select(SettingsData.get_resolution())
 
 func add_resolution_size_items() -> void:
 	for resolution_size_text in RESOLUTION_DICTIONARY:
@@ -20,4 +24,5 @@ func add_resolution_size_items() -> void:
 
 
 func _on_option_button_item_selected(index: int) -> void:
+	SettingsSignals.emit_resolution(index)
 	DisplayServer.window_set_size(RESOLUTION_DICTIONARY.values()[index])

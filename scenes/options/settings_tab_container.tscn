@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://q6dr6nnxug2o"]
+[gd_scene load_steps=12 format=3 uid="uid://q6dr6nnxug2o"]
 
 [ext_resource type="FontFile" uid="uid://b2pl8ephfxo3p" path="res://assets/Fonts/pixel_rpg.ttf" id="1_vajfs"]
 [ext_resource type="PackedScene" uid="uid://cdnidtwl2kg4i" path="res://scenes/options/hotkey_rebind_button.tscn" id="1_xpwon"]
@@ -21,6 +21,8 @@ content_margin_left = 10.0
 content_margin_right = 10.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vajfs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k3i0j"]
 
 [node name="Settings_Tab_Container" type="Control"]
 layout_mode = 3
@@ -110,7 +112,7 @@ theme_override_constants/separation = 45
 
 [node name="HSeparator" type="HSeparator" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 30
 theme_override_styles/separator = SubResource("StyleBoxEmpty_vajfs")
 
 [node name="Forward" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xpwon")]
@@ -177,6 +179,11 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Sound/MarginContainer/ScrollContainer"]
 layout_mode = 2
 theme_override_constants/separation = 35
+
+[node name="HSeparator" type="HSeparator" parent="TabContainer/Sound/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+theme_override_styles/separator = SubResource("StyleBoxEmpty_k3i0j")
 
 [node name="Audio_Slider_Settings" parent="TabContainer/Sound/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("5_pe8by")]
 layout_mode = 2

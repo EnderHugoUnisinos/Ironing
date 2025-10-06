@@ -21,7 +21,7 @@ bus_name = "Master"
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-theme_override_constants/separation = 40
+theme_override_constants/separation = 15
 
 [node name="Audio_Label" type="Label" parent="HBoxContainer"]
 layout_mode = 2

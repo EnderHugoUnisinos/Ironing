@@ -1,0 +1,117 @@
+[gd_scene load_steps=10 format=3 uid="uid://cda4hbn638jlp"]
+
+[ext_resource type="Script" uid="uid://dnq4gufsceisr" path="res://scenes/menus/level_container.gd" id="1_1jc74"]
+[ext_resource type="Texture2D" uid="uid://cl7u3cqdfbivh" path="res://assets/textures/PUS-MenuBlank-V001.png" id="1_k1smc"]
+[ext_resource type="PackedScene" uid="uid://bx3tvo04373em" path="res://scenes/menus/level_choice.tscn" id="2_xus73"]
+[ext_resource type="FontFile" uid="uid://b2pl8ephfxo3p" path="res://assets/Fonts/pixel_rpg.ttf" id="4_y0o7i"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xus73"]
+texture = ExtResource("1_k1smc")
+modulate_color = Color(0.856067, 0.856067, 0.856067, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qmw5l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f6reu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nxsln"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_32x1o"]
+
+[node name="Level_Container" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -7.0
+offset_right = -25.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1jc74")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -552.0
+offset_top = 467.0
+offset_right = 310.0
+offset_bottom = 1597.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.5708
+theme_override_styles/panel = SubResource("StyleBoxTexture_xus73")
+metadata/_edit_lock_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -395.0
+offset_top = 102.0
+offset_right = 439.0
+offset_bottom = -59.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 50
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme_override_constants/separation = 90
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/ScrollContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+theme_override_styles/separator = SubResource("StyleBoxEmpty_qmw5l")
+
+[node name="Level_Choice" parent="MarginContainer/ScrollContainer/HBoxContainer" instance=ExtResource("2_xus73")]
+custom_minimum_size = Vector2(100, 300)
+layout_mode = 2
+level_name = "Level 1"
+
+[node name="Level_Choice2" parent="MarginContainer/ScrollContainer/HBoxContainer" instance=ExtResource("2_xus73")]
+custom_minimum_size = Vector2(100, 300)
+layout_mode = 2
+level_name = "Level 2"
+
+[node name="Level_Choice3" parent="MarginContainer/ScrollContainer/HBoxContainer" instance=ExtResource("2_xus73")]
+custom_minimum_size = Vector2(100, 300)
+layout_mode = 2
+level_name = "Level 3"
+
+[node name="VSeparator2" type="VSeparator" parent="MarginContainer/ScrollContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+theme_override_styles/separator = SubResource("StyleBoxEmpty_qmw5l")
+
+[node name="Return_Button" type="Button" parent="MarginContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_colors/font_hover_pressed_color = Color(0.751598, 0.132783, 0.341816, 1)
+theme_override_colors/font_hover_color = Color(0.47201, 0.0567509, 0.201454, 1)
+theme_override_colors/font_color = Color(0.177555, 0.31127, 0.678331, 1)
+theme_override_colors/font_focus_color = Color(0.177555, 0.31127, 0.678331, 1)
+theme_override_colors/font_pressed_color = Color(0.751598, 0.132783, 0.341816, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_y0o7i")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_f6reu")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_nxsln")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_32x1o")
+text = "Return to Menu"
+
+[connection signal="pressed" from="MarginContainer/Return_Button" to="." method="_on_return_button_pressed"]
