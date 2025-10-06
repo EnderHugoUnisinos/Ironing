@@ -453,20 +453,6 @@ script = ExtResource("2_7de08")
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 1.48724, 2.1712)
 
-[node name="Menu" type="Control" parent="."]
-process_mode = 3
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("4_ikjww")
-
-[node name="Menu Container" parent="Menu" instance=ExtResource("5_leroj")]
-layout_mode = 1
-offset_right = 1112.0
-offset_bottom = 608.0
-
 [node name="Hud" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
@@ -486,3 +472,17 @@ theme_override_styles/background = SubResource("StyleBoxFlat_leroj")
 theme_override_styles/fill = SubResource("StyleBoxFlat_k660p")
 value = 100.0
 fill_mode = 3
+
+[node name="Menu" type="Control" parent="."]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_ikjww")
+
+[node name="Menu Container" parent="Menu" instance=ExtResource("5_leroj")]
+layout_mode = 1
+offset_right = 1112.0
+offset_bottom = 608.0

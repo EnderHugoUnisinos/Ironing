@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dvq22u1asak8s"]
 
 [ext_resource type="Script" uid="uid://cksfk2gt0odtk" path="res://scripts/options/audio_slider_settings.gd" id="1_bm1pd"]
-[ext_resource type="FontFile" uid="uid://b2pl8ephfxo3p" path="res://assets/Fonts/pixel_rpg.ttf" id="2_i7w2s"]
+[ext_resource type="FontFile" uid="uid://b2pl8ephfxo3p" path="res://assets/fonts/pixel_rpg.ttf" id="2_i7w2s"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k3kui"]
 

@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://btwos4rd3e57o"]
+
+[ext_resource type="Script" uid="uid://bm35esg3uifel" path="res://scripts/water_orb.gd" id="1_ur57u"]
+[ext_resource type="Material" uid="uid://11ffbxnqpkf0" path="res://assets/materials/water.tres" id="2_lqujw"]
+[ext_resource type="Material" uid="uid://caxbds8r258kj" path="res://assets/materials/orbe_vidro.tres" id="3_fykyy"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jinhd"]
+size = Vector3(0.4, 0.4, 0.4)
+
+[sub_resource type="SphereMesh" id="SphereMesh_0joms"]
+radius = 0.2
+height = 0.4
+
+[sub_resource type="SphereMesh" id="SphereMesh_lqujw"]
+radius = 0.21
+height = 0.42
+
+[node name="orbe_agua" type="Area3D"]
+script = ExtResource("1_ur57u")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_jinhd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("2_lqujw")
+mesh = SubResource("SphereMesh_0joms")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+material_override = ExtResource("3_fykyy")
+mesh = SubResource("SphereMesh_lqujw")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

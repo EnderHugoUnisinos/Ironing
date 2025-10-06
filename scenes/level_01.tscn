@@ -1,0 +1,103 @@
+[gd_scene load_steps=7 format=3 uid="uid://dh1ifa6afj02n"]
+
+[ext_resource type="PackedScene" uid="uid://cp8242762l2nq" path="res://objects/character_iron.tscn" id="1_bpt1m"]
+[ext_resource type="PackedScene" uid="uid://bnrb0hiuqhsi7" path="res://assets/level_imports/level_test.tscn" id="2_4lj41"]
+[ext_resource type="PackedScene" uid="uid://btwos4rd3e57o" path="res://objects/orbe_agua.tscn" id="3_mofoo"]
+[ext_resource type="PackedScene" uid="uid://dlrmy2hyvdsfe" path="res://objects/not_ready/end_level.tscn" id="4_nr3cb"]
+
+[sub_resource type="Environment" id="Environment_mofoo"]
+ssao_radius = 0.01
+glow_enabled = true
+glow_normalized = true
+fog_density = 0.047
+fog_height = 824.89
+fog_height_density = -1.1111
+volumetric_fog_density = 0.2236
+
+[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_mofoo"]
+exposure_multiplier = 1.322
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mofoo")
+camera_attributes = SubResource("CameraAttributesPhysical_mofoo")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.4328, 0)
+light_energy = 10.0
+light_specular = 1.262
+light_bake_mode = 1
+shadow_enabled = true
+shadow_bias = 0.2
+shadow_blur = 2.0
+omni_range = 78.3295
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.8783, 18.4328, 0)
+light_energy = 10.0
+light_specular = 1.262
+light_bake_mode = 1
+shadow_enabled = true
+shadow_bias = 0.2
+shadow_blur = 2.0
+omni_range = 78.3295
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.8783, 18.4328, 21.5512)
+light_energy = 10.0
+light_specular = 1.262
+light_bake_mode = 1
+shadow_enabled = true
+shadow_bias = 0.2
+shadow_blur = 2.0
+omni_range = 78.3295
+
+[node name="SpotLight3D" type="SpotLight3D" parent="WorldEnvironment"]
+transform = Transform3D(-1, 0, 8.9407e-08, 0, 1, 0, -8.9407e-08, 0, -1, 0, 13.2607, -44.7918)
+light_energy = 50.0
+light_size = 1.0
+light_bake_mode = 1
+spot_range = 71.0803
+spot_angle = 23.5487
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="WorldEnvironment"]
+transform = Transform3D(-1, 0, 8.9407e-08, 0, 1, 0, -8.9407e-08, 0, -1, 51, 13.2607, -58.085)
+light_energy = 60.0
+light_size = 1.0
+light_bake_mode = 1
+spot_range = 118.066
+spot_angle = 21.7877
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1.33118e-07, 0, 1, 0, 1, 0, -1, 0, 1.33118e-07, 96.6717, 12.2607, 27.049)
+light_energy = 50.0
+light_size = 1.0
+light_bake_mode = 1
+spot_range = 90.0719
+spot_angle = 23.515
+
+[node name="Character_Iron" parent="." groups=["player"] instance=ExtResource("1_bpt1m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.1999, 0, 0)
+
+[node name="orbe_agua" parent="." instance=ExtResource("3_mofoo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.9694, 7.78691, 16.0777)
+
+[node name="orbe_agua2" parent="." instance=ExtResource("3_mofoo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.111146, 4.68108, -0.160168)
+
+[node name="orbe_agua3" parent="." instance=ExtResource("3_mofoo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.3961, 7.41304, 0.872059)
+
+[node name="orbe_agua4" parent="." instance=ExtResource("3_mofoo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.2525, 1.06082, 14.7239)
+
+[node name="orbe_agua5" parent="." instance=ExtResource("3_mofoo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0738792, 0.530494, -0.00957727)
+
+[node name="level_test" parent="." instance=ExtResource("2_4lj41")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+
+[node name="EndDetect" parent="." instance=ExtResource("4_nr3cb")]
+transform = Transform3D(1.6, 0, 0, 0, 1, 0, 0, 0, 1.6, 61.33, 5.26171, 27.2938)
+next_level = "uid://1leop00d28at"

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cscmyubo00ghn" path="res://scripts/options/option_container.gd" id="1_p4o5x"]
 [ext_resource type="PackedScene" uid="uid://q6dr6nnxug2o" path="res://scenes/options/settings_tab_container.tscn" id="2_b7xdu"]
-[ext_resource type="FontFile" uid="uid://b2pl8ephfxo3p" path="res://assets/Fonts/pixel_rpg.ttf" id="3_ywee8"]
+[ext_resource type="FontFile" uid="uid://b2pl8ephfxo3p" path="res://assets/fonts/pixel_rpg.ttf" id="3_ywee8"]
 
 [sub_resource type="SystemFont" id="SystemFont_nwbci"]
 font_names = PackedStringArray("Segoe UI")

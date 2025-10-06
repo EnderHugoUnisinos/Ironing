@@ -57,14 +57,18 @@ func _process(delta: float) -> void:
 		walk = true
 	else:
 		walk = false
-	if Input.is_action_pressed("special"):
-		if timer.time_left == 0 and is_on_floor() and current_mode != iron_mode.IRONING:
-			switch_mode(iron_mode.IRONING)
-	elif !Input.is_action_pressed("special"):
-		if timer.time_left == 0 and is_on_floor() and current_mode != iron_mode.STANDING:
-			switch_mode(iron_mode.STANDING)
+	if water_meter.value > 0:
+		if Input.is_action_pressed("special"):
+			if timer.time_left == 0 and is_on_floor() and current_mode != iron_mode.IRONING:
+				switch_mode(iron_mode.IRONING)
+		elif !Input.is_action_pressed("special"):
+			if timer.time_left == 0 and is_on_floor() and current_mode != iron_mode.STANDING:
+				switch_mode(iron_mode.STANDING)
 
 func _physics_process(delta: float) -> void:
+	if water_meter.value <= 0:
+		if current_mode == iron_mode.IRONING:
+			switch_mode(iron_mode.STANDING)
 	if last_floor_normal == Vector3.ZERO:
 		last_floor_normal = Vector3.UP.normalized()
 	var input_vec := Vector2(
@@ -148,8 +152,11 @@ func _physics_process(delta: float) -> void:
 		last_floor_normal = get_floor_normal().normalized()
 		var target = ground_ray.get_collider()
 		var shape_id = ground_ray.get_collider_shape()
-		current_floor_collider = target.shape_owner_get_owner(shape_id)
-		
+		if target.shape_owner_get_owner(shape_id).get_script():
+			if !target.shape_owner_get_owner(shape_id).ramp():
+				current_floor_collider = target.shape_owner_get_owner(shape_id)
+		else:
+			current_floor_collider = target.shape_owner_get_owner(shape_id)
 	if !is_on_floor():
 		last_floor_normal.x = move_toward(last_floor_normal.x, 0, ((9.2)*delta))
 		last_floor_normal.y = move_toward(last_floor_normal.y, 1, ((9.2)*delta))

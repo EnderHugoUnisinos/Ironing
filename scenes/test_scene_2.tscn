@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://c8lrfeogxmdd1"]
+[gd_scene load_steps=22 format=4 uid="uid://c8lrfeogxmdd1"]
 
 [ext_resource type="PackedScene" uid="uid://cp8242762l2nq" path="res://objects/character_iron.tscn" id="1_r8opr"]
 [ext_resource type="Script" uid="uid://bj4a0vi7spiwe" path="res://scenes/area_3d.gd" id="2_4ol47"]
@@ -9,6 +9,9 @@
 [ext_resource type="Script" uid="uid://cmqw85ivnarjj" path="res://scripts/surfaces/tecido.gd" id="5_vy022"]
 [ext_resource type="Material" uid="uid://dytuclf2pcj42" path="res://assets/materials/estofado.tres" id="6_jtlye"]
 [ext_resource type="Script" uid="uid://dcctrhx3tcrhk" path="res://scripts/surfaces/estofado.gd" id="8_jinhd"]
+[ext_resource type="Script" uid="uid://bbmqekufcadc5" path="res://scripts/surfaces/rampa.gd" id="10_g3tec"]
+[ext_resource type="PackedScene" uid="uid://btwos4rd3e57o" path="res://objects/orbe_agua.tscn" id="11_tvffb"]
+[ext_resource type="PackedScene" uid="uid://bnrb0hiuqhsi7" path="res://assets/level_imports/level_test.tscn" id="12_tvffb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i7v18"]
 
@@ -77,7 +80,7 @@ transform = Transform3D(0.0550316, 0.604609, -0.794619, -0.0115444, 0.796157, 0.
 shadow_enabled = true
 
 [node name="Character_Iron" parent="." groups=["player"] instance=ExtResource("1_r8opr")]
-transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 0, 3.4672, 0)
+transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, -15.3227, 0.458118, -5.36869)
 
 [node name="Area3D" type="Area3D" parent="."]
 script = ExtResource("2_4ol47")
@@ -87,6 +90,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("WorldBoundaryShape3D_jtlye")
 
 [node name="level" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -91.8593, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4, 0)
@@ -230,12 +234,12 @@ shape = SubResource("ConvexPolygonShape3D_e7yap")
 transform = Transform3D(0.573576, 0, -0.819152, 0, 1, 0, 0.819152, 0, 0.573576, 11.4, -4.3, 9.0042)
 mesh = SubResource("ArrayMesh_i7v18")
 skeleton = NodePath("")
-script = ExtResource("5_vy022")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="level/ramps/Cube_006"]
 
 [node name="CollisionShape3D8" type="CollisionShape3D" parent="level/ramps/Cube_006/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_e7yap")
+script = ExtResource("10_g3tec")
 
 [node name="Cube_007" type="MeshInstance3D" parent="level/ramps"]
 transform = Transform3D(-0.573576, 0, 0.819152, 0, 1, 0, -0.819152, 0, -0.573576, -11.2, -4.3, 10.0042)
@@ -276,6 +280,7 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D8" type="CollisionShape3D" parent="level/ramps/Cube_013/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_e7yap")
+script = ExtResource("10_g3tec")
 
 [node name="Cube_014" type="MeshInstance3D" parent="level/ramps"]
 transform = Transform3D(-0.573576, 0, 0.819152, 0, 1, 0, -0.819152, 0, -0.573576, -11.2, -4.3, 67.0042)
@@ -286,6 +291,7 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D8" type="CollisionShape3D" parent="level/ramps/Cube_014/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_e7yap")
+script = ExtResource("10_g3tec")
 
 [node name="Cube_016" type="MeshInstance3D" parent="level/ramps"]
 transform = Transform3D(-0.573576, 0, 0.819152, 0, 1, 0, -0.819152, 0, -0.573576, -11.2, -4.3, 48.0042)
@@ -343,10 +349,10 @@ mesh = SubResource("ArrayMesh_i7v18")
 skeleton = NodePath("")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="level/ramps/Cube_008"]
-script = ExtResource("5_vy022")
 
 [node name="CollisionShape3D8" type="CollisionShape3D" parent="level/ramps/Cube_008/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_e7yap")
+script = ExtResource("10_g3tec")
 
 [node name="Cube_009" type="MeshInstance3D" parent="level/ramps"]
 transform = Transform3D(-0.573576, 0, 0.819152, 0, 1, 0, -0.819152, 0, -0.573576, -11.2, -4.3, -27.9958)
@@ -367,5 +373,24 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D8" type="CollisionShape3D" parent="level/ramps/Cube_010/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_e7yap")
+
+[node name="orbe_agua" parent="." instance=ExtResource("11_tvffb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.147502, 4.56132, -0.485763)
+
+[node name="orbe_agua2" parent="." instance=ExtResource("11_tvffb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.209, 6.81168, 0.774739)
+
+[node name="orbe_agua3" parent="." instance=ExtResource("11_tvffb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.2152, 6.136, 24.0458)
+
+[node name="orbe_agua4" parent="." instance=ExtResource("11_tvffb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.5952, 0.2, 24.4373)
+
+[node name="orbe_agua5" parent="." instance=ExtResource("11_tvffb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.362137, 0.2, 0.0504513)
+
+[node name="level_test" parent="." instance=ExtResource("12_tvffb")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+visible = false
 
 [connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]

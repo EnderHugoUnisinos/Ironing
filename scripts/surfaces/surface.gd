@@ -15,3 +15,6 @@ func surface_walk(player):
 
 func surface_jump(player):
 	pass
+
+func ramp():
+	pass

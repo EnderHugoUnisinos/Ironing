@@ -1,0 +1,127 @@
+[gd_scene load_steps=8 format=3 uid="uid://1leop00d28at"]
+
+[ext_resource type="Texture2D" uid="uid://kpvpa4pqdbao" path="res://assets/images/menu_art.png" id="1_l6cm7"]
+[ext_resource type="FontFile" uid="uid://b2pl8ephfxo3p" path="res://assets/fonts/pixel_rpg.ttf" id="2_ekxnf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bqqt6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wu84c"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8ln24"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rtw2f"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oa1go"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuArt" type="Sprite2D" parent="."]
+position = Vector2(580, 326)
+scale = Vector2(0.611574, 0.611574)
+texture = ExtResource("1_l6cm7")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -21.0
+offset_top = 363.0
+offset_right = 465.0
+offset_bottom = 604.0
+rotation = 0.646451
+color = Color(0, 0, 0, 0.356863)
+
+[node name="start_button" type="Button" parent="."]
+custom_minimum_size = Vector2(150, 25)
+layout_mode = 0
+offset_left = -14.0
+offset_top = 440.0
+offset_right = 280.0
+offset_bottom = 491.0
+size_flags_horizontal = 4
+tooltip_text = "Yelp
+"
+theme_override_colors/font_hover_pressed_color = Color(0.549096, 0.744991, 0.765011, 1)
+theme_override_colors/font_hover_color = Color(0.27514, 0.758876, 0.823573, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.466667)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(0.177555, 0.31127, 0.678331, 1)
+theme_override_colors/font_pressed_color = Color(0.0977035, 0.403998, 0.450889, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("2_ekxnf")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bqqt6")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_wu84c")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_8ln24")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_rtw2f")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_oa1go")
+text = "Play"
+
+[node name="options_button" type="Button" parent="."]
+custom_minimum_size = Vector2(150, 25)
+layout_mode = 0
+offset_left = -14.0
+offset_top = 509.0
+offset_right = 280.0
+offset_bottom = 560.0
+size_flags_horizontal = 4
+tooltip_text = "Yelp
+"
+theme_override_colors/font_hover_pressed_color = Color(0.549096, 0.744991, 0.765011, 1)
+theme_override_colors/font_hover_color = Color(0.27451, 0.760784, 0.823529, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.466667)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(0.177555, 0.31127, 0.678331, 1)
+theme_override_colors/font_pressed_color = Color(0.0977035, 0.403998, 0.450889, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("2_ekxnf")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bqqt6")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_wu84c")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_8ln24")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_rtw2f")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_oa1go")
+text = "Options"
+
+[node name="quit_button" type="Button" parent="."]
+custom_minimum_size = Vector2(150, 25)
+layout_mode = 0
+offset_left = -14.0
+offset_top = 580.0
+offset_right = 280.0
+offset_bottom = 631.0
+size_flags_horizontal = 4
+tooltip_text = "Yelp
+"
+theme_override_colors/font_hover_pressed_color = Color(0.549096, 0.744991, 0.765011, 1)
+theme_override_colors/font_hover_color = Color(0.27451, 0.760784, 0.823529, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.466667)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(0.177555, 0.31127, 0.678331, 1)
+theme_override_colors/font_pressed_color = Color(0.0977035, 0.403998, 0.450889, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("2_ekxnf")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bqqt6")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_wu84c")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_8ln24")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_rtw2f")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_oa1go")
+text = "Quit"
+
+[node name="title_label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 315.0
+offset_top = 47.0
+offset_right = 815.0
+offset_bottom = 108.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.0666667)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_fonts/font = ExtResource("2_ekxnf")
+theme_override_font_sizes/font_size = 60
+text = "A Todo Vapor"

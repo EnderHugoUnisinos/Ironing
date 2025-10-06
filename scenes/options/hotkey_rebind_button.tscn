@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cdnidtwl2kg4i"]
 
 [ext_resource type="Script" uid="uid://dxyugku6w5ygg" path="res://scripts/options/hotkey_rebind_button.gd" id="1_ijtsw"]
-[ext_resource type="FontFile" uid="uid://b2pl8ephfxo3p" path="res://assets/Fonts/pixel_rpg.ttf" id="2_gyo21"]
+[ext_resource type="FontFile" uid="uid://b2pl8ephfxo3p" path="res://assets/fonts/pixel_rpg.ttf" id="2_gyo21"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ywgsv"]
 

@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsaf2w86lwbq2"
-path.s3tc="res://.godot/imported/level_test_Floor_1m x 1m.png-c8e21d1b6fca5617e0263b10be6b2333.s3tc.ctex"
+uid="uid://bn6wa7y07fjao"
+path.s3tc="res://.godot/imported/level_test_clothes.png-2c35938f70eb1e3f6879cae2a7c89ea5.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "eceddffe86469fcf108f22528d3ab9dc"
+"md5": "3677a614da13c862c4637356aec75a67"
 }
 
 [deps]
 
-source_file="res://assets/level-imports/level_test_Floor_1m x 1m.png"
-dest_files=["res://.godot/imported/level_test_Floor_1m x 1m.png-c8e21d1b6fca5617e0263b10be6b2333.s3tc.ctex"]
+source_file="res://assets/level_imports/level_test_clothes.png"
+dest_files=["res://.godot/imported/level_test_clothes.png-2c35938f70eb1e3f6879cae2a7c89ea5.s3tc.ctex"]
 
 [params]
 

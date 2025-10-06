@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://q6dr6nnxug2o"]
 
-[ext_resource type="FontFile" uid="uid://b2pl8ephfxo3p" path="res://assets/Fonts/pixel_rpg.ttf" id="1_vajfs"]
+[ext_resource type="FontFile" uid="uid://b2pl8ephfxo3p" path="res://assets/fonts/pixel_rpg.ttf" id="1_vajfs"]
 [ext_resource type="PackedScene" uid="uid://cdnidtwl2kg4i" path="res://scenes/options/hotkey_rebind_button.tscn" id="1_xpwon"]
 [ext_resource type="PackedScene" uid="uid://bsvtuup8mdkaf" path="res://scenes/options/window_mode_button.tscn" id="2_j6vtx"]
 [ext_resource type="PackedScene" uid="uid://b7cfxav6ix40f" path="res://scenes/options/resolution_mode_button.tscn" id="3_a567c"]

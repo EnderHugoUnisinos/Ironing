@@ -2,12 +2,13 @@
 extends EditorScript
 
 var path = "res://assets/level_imports/"
-var file_name = "level_test_3"
+var file_name = "level_test"
 var file_extension = "glb"
 
 var tecido_script : Script = preload("res://scripts/surfaces/tecido.gd")
 var madeira_script : Script = preload("res://scripts/surfaces/madeira.gd")
 var estofado_script : Script = preload("res://scripts/surfaces/estofado.gd")
+var rampa_script : Script = preload("res://scripts/surfaces/rampa.gd")
 
 func _run() -> void:
 	var scene_path = path + file_name + "." + file_extension
@@ -58,6 +59,8 @@ func _run() -> void:
 					collider.set_script(madeira_script)
 				elif "estofado" in name_parts:
 					collider.set_script(estofado_script)
+				elif "rampa" in name_parts:
+					collider.set_script(rampa_script)
 			else:
 				static_body.add_child(node_mesh)
 			scene_instance.remove_child(node)

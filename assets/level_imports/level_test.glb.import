@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bo5lox744qfmi"
-path="res://.godot/imported/level_test.glb-a9ec273bd1c550c538dc82d32a84f5e2.scn"
+uid="uid://brxbmi13xghc3"
+path="res://.godot/imported/level_test.glb-d8d1e2081f2f0e8bc328fd6cf4cbaacc.scn"
 
 [deps]
 
-source_file="res://assets/level-imports/level_test.glb"
-dest_files=["res://.godot/imported/level_test.glb-a9ec273bd1c550c538dc82d32a84f5e2.scn"]
+source_file="res://assets/level_imports/level_test.glb"
+dest_files=["res://.godot/imported/level_test.glb-d8d1e2081f2f0e8bc328fd6cf4cbaacc.scn"]
 
 [params]
 
@@ -32,13 +32,6 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
-_subresources={
-"materials": {
-"Material": {
-"use_external/enabled": true,
-"use_external/path": "uid://sg2s514fawpu"
-}
-}
-}
+_subresources={}
 gltf/naming_version=1
 gltf/embedded_image_handling=1

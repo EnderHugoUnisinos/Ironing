@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://ctpgitiggqlv0"]
 
-[ext_resource type="PackedScene" uid="uid://cmh3p513bgosf" path="res://assets/level-imports/level_test.tscn" id="2_j8ivh"]
+[ext_resource type="PackedScene" uid="uid://bnrb0hiuqhsi7" path="res://assets/level_imports/level_test.tscn" id="2_j8ivh"]
 [ext_resource type="PackedScene" uid="uid://cp8242762l2nq" path="res://objects/character_iron.tscn" id="2_nd71p"]
 [ext_resource type="Script" uid="uid://bj4a0vi7spiwe" path="res://scenes/area_3d.gd" id="3_nd71p"]
 
