@@ -16,6 +16,9 @@ func _ready() ->void:
 func set_level_name() -> void:
 	label.text = level_name
 
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("open_menu") and self.visible == true:
+		self.visible = false
 
 func _on_button_pressed() -> void:
 	get_tree().change_scene_to_file(level_path)

@@ -21,4 +21,6 @@ func add_resolution_size_items() -> void:
 
 
 func _on_option_button_item_selected(index: int) -> void:
-	DisplayServer.window_set_size(RESOLUTION_DICTIONARY.values()[index])
+	#DisplayServer.window_set_size(RESOLUTION_DICTIONARY.values()[index])
+	var window = get_window()
+	window.size = RESOLUTION_DICTIONARY.values()[index]

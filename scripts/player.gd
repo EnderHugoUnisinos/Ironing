@@ -17,6 +17,9 @@ extends MovementBase
 @onready var collision_standing = $CollisionStanding
 @onready var ground_ray = $GroundRay
 @onready var water_meter : ProgressBar = $Hud/WaterMeter
+@onready var end_pointer : RayCast3D = $CameraPivot/Camera3D/EndPointer
+
+@export var stage_end : Node3D
 
 enum iron_mode {STANDING, IRONING}
 var current_mode : iron_mode = iron_mode.STANDING
@@ -53,6 +56,7 @@ func switch_mode(switch_mode):
 		self.floor_stop_on_slope = true
 
 func _process(delta: float) -> void:
+	end_pointer.look_at(stage_end.global_position)
 	if (self.velocity.x > 0.01 or self.velocity.x < -0.01) or (self.velocity.z > 0.01 or self.velocity.z < -0.01):
 		walk = true
 	else:

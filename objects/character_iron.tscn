@@ -1,10 +1,11 @@
-[gd_scene load_steps=45 format=4 uid="uid://cp8242762l2nq"]
+[gd_scene load_steps=48 format=4 uid="uid://cp8242762l2nq"]
 
 [ext_resource type="Script" uid="uid://diqp3b7x3sit7" path="res://scripts/player.gd" id="1_mkvct"]
 [ext_resource type="Script" uid="uid://ihxquk3vhpsl" path="res://scripts/camera_pivot.gd" id="2_7de08"]
 [ext_resource type="Script" uid="uid://dfq3ixu3fvvn6" path="res://objects/rotation.gd" id="2_ikjww"]
 [ext_resource type="Script" uid="uid://bvyat61m0sgej" path="res://scripts/options/open_menu.gd" id="4_ikjww"]
 [ext_resource type="FontFile" uid="uid://b2pl8ephfxo3p" path="res://assets/fonts/pixel_rpg.ttf" id="4_k660p"]
+[ext_resource type="Material" uid="uid://bfiqw4514fh2v" path="res://assets/materials/pointer.tres" id="4_lg115"]
 [ext_resource type="PackedScene" uid="uid://bcpqjncy5w73y" path="res://scenes/options/menu_container.tscn" id="5_leroj"]
 [ext_resource type="Script" uid="uid://ccn5kxfvvt6pj" path="res://objects/time_meter.gd" id="5_vh2yd"]
 
@@ -351,6 +352,38 @@ radius = 0.4
 radius = 0.308645
 height = 1.04488
 
+[sub_resource type="ArrayMesh" id="ArrayMesh_hmgma"]
+_surfaces = [{
+"aabb": AABB(-0.04, -0.0052, -0.06, 0.08, 0.0112, 0.12),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAQADAAIAAAACAAMAAQAEAAMAAAADAAUABAAFAAMAAAAGAAEABgAEAAEABQAGAAAABwAEAAYABAAHAAUABQAHAAYA"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("/3///wAAAAD//wAA//8AAP///////wAA/3///6qqAAD/fwAAqqoAAAAA/////wAA/38AAAAAAAAAAAAA//8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ownxy"]
+resource_name = "pointer_Cube"
+_surfaces = [{
+"aabb": AABB(-0.04, -0.0052, -0.06, 0.08, 0.0112, 0.12),
+"attribute_data": PackedByteArray("/5//n/9f/z//n/8//1//n/9f/x//nwAA/5//H/9fAAD/P/9//z//P/9f/z//H/8//7//f/+//z//3/8//5//P/9f/z//n/8f/5//P/9f/x//n////1//n/+f/5//X///"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACwAJAAgADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": ExtResource("4_lg115"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("/3///wAAQ93//wAA//9D3f///////0Pd/38AAAAAQ93/fwAAqqr8xQAA//////zF/3///6qq/MUAAAAA///8xf9/AAAAAP+//38AAKqq/7///wAA///8xQAAAAD///zF/3///wAA////f///qqr//wAA/////6rp////////qun//wAA///8xf9///+qqvzF/////////MX/fwAAqqr8xQAA/////0Pd/38AAAAAQ93/f///AABD3QAAAAD//0PdCy8LLwsvCy8LLwsvCy8LL/8c/xz/HP8c/xz/HP8c/xwAAP9/AAD/f/8c/bn+OQBj/3//v/9//7/1lQS1+sr2Ff/i/+L/4v/i/+L/4v/i/+Lz0PPQ89Dz0PPQ89Dz0PPQ")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_hmgma")
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_leroj"]
 bg_color = Color(0.176419, 0.176419, 0.176419, 0.188235)
 border_blend = true
@@ -454,6 +487,17 @@ script = ExtResource("2_7de08")
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 1.48724, 2.1712)
+current = true
+
+[node name="EndPointer" type="RayCast3D" parent="CameraPivot/Camera3D"]
+transform = Transform3D(1, -2.4564e-20, 2.20229e-20, 7.6233e-21, 1, 0, 3.38813e-21, 0, 1, 1.08232e-14, -0.824726, -1.58723)
+target_position = Vector3(0, 0, -1)
+
+[node name="Pointer" type="MeshInstance3D" parent="CameraPivot/Camera3D/EndPointer"]
+transform = Transform3D(3, -2.5411e-21, -5.0822e-21, 2.5411e-21, 3, -4.30479e-42, 5.0822e-21, 0, 3, 0, 0, 0)
+ignore_occlusion_culling = true
+mesh = SubResource("ArrayMesh_ownxy")
+skeleton = NodePath("")
 
 [node name="Hud" type="Control" parent="."]
 layout_mode = 3
@@ -465,10 +509,10 @@ grow_vertical = 2
 
 [node name="WaterMeter" type="ProgressBar" parent="Hud"]
 layout_mode = 2
-offset_left = 522.0
-offset_top = 520.0
-offset_right = 622.0
-offset_bottom = 620.0
+offset_left = 1014.0
+offset_top = 514.0
+offset_right = 1114.0
+offset_bottom = 614.0
 size_flags_vertical = 1
 theme_override_styles/background = SubResource("StyleBoxFlat_leroj")
 theme_override_styles/fill = SubResource("StyleBoxFlat_k660p")
