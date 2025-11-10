@@ -2,13 +2,15 @@
 extends EditorScript
 
 var path = "res://assets/level_imports/"
-var file_name = "level_test"
+var file_name = "garagem"
 var file_extension = "glb"
 
 var tecido_script : Script = preload("res://scripts/surfaces/tecido.gd")
 var madeira_script : Script = preload("res://scripts/surfaces/madeira.gd")
 var estofado_script : Script = preload("res://scripts/surfaces/estofado.gd")
+var plastico_script : Script = preload("res://scripts/surfaces/plastico.gd")
 var rampa_script : Script = preload("res://scripts/surfaces/rampa.gd")
+var escorrega_script : Script = preload("res://scripts/surfaces/escorrega.gd")
 
 func _run() -> void:
 	var scene_path = path + file_name + "." + file_extension
@@ -27,7 +29,7 @@ func _run() -> void:
 	var scene_children : Array[Node] = scene_instance.get_children()
 	
 	var static_body = StaticBody3D.new()
-	static_body.name = "level_static_body"
+	static_body.name = "static_body"
 	
 	scene_instance.add_child(static_body)
 	static_body.set_owner(scene_instance)
@@ -38,7 +40,7 @@ func _run() -> void:
 		for i in range(len(name_parts)):
 			name_parts[i] = name_parts[i].to_lower()
 			name_parts[i] = name_parts[i].split(".")[0]
-		
+		print(name_parts)
 		if node.get_class() == "MeshInstance3D":
 			var node_mesh : MeshInstance3D = node.duplicate()
 			if "collider" in name_parts: 
@@ -61,11 +63,12 @@ func _run() -> void:
 					collider.set_script(estofado_script)
 				elif "rampa" in name_parts:
 					collider.set_script(rampa_script)
+				elif "plastico" in name_parts:
+					collider.set_script(plastico_script)
+				elif "escorrega" in name_parts:
+					collider.set_script(escorrega_script)
+				scene_instance.remove_child(node)
 			else:
-				static_body.add_child(node_mesh)
-			scene_instance.remove_child(node)
-		elif node.get_class() == "Node3D":
-			if "refill" in name_parts:
 				pass
 	scene_children = scene_instance.get_children()
 	

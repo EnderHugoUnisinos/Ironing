@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bfiqw4514fh2v"]
+
+[resource]
+no_depth_test = true
+emission_enabled = true
+emission = Color(0, 0.890196, 0.380392, 1)

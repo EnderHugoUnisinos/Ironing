@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=4 uid="uid://ky8kv44ewrml"]
+
+[ext_resource type="Script" uid="uid://bbmqekufcadc5" path="res://scripts/surfaces/rampa.gd" id="1_xl7oc"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_thr6s"]
+data = PackedVector3Array(-0.08, 0, 0.08, -0.08, 0.16, -0.08, -0.08, 0.16, 0.08, -0.08, 0, 0.08, -0.08, 0, -0.08, -0.08, 0.16, -0.08, -0.08, 0, -0.08, 0.08, 0, -0.08, -0.08, 0.16, -0.08, 0.08, 0, 0.08, -0.08, 0, 0.08, -0.08, 0.16, 0.08, -0.08, 0, -0.08, 0.08, 0, 0.08, 0.08, 0, -0.08, -0.08, 0, -0.08, -0.08, 0, 0.08, 0.08, 0, 0.08, -0.08, 0.16, -0.08, 0.08, 0, 0.08, -0.08, 0.16, 0.08, -0.08, 0.16, -0.08, 0.08, 0, -0.08, 0.08, 0, 0.08)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tavmt"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_3fn5j"]
+_surfaces = [{
+"aabb": AABB(-0.08, 0, -0.08, 0.16, 0.16, 0.16),
+"format": 34896613377,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAAAAIAAwAAAAQAAQAEAAIAAwAEAAUAAQAFAAQAAwAFAAEA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAD//wAA//8AAP//AAAAAAAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_es3v4"]
+resource_name = "rampa_45_Cube"
+_surfaces = [{
+"aabb": AABB(-0.08, 0, -0.08, 0.16, 0.16, 0.16),
+"attribute_data": PackedByteArray("/1////+f/7//n////1//v/9f/7//X/9//5//v/9f/z//XwAA/58AAP8f/3//X/8//1//f/8f/z//3/9//1//P//f/z//X/9/"),
+"format": 34896613399,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABwAIAAkACgALAAwACgANAAsADgAPABAADgARAA8A"),
+"material": SubResource("StandardMaterial3D_tavmt"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 18,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAP//AABU1QAA/////1TVAAAAAAAAVNUAAAAAAAD/////AAAAAP//AAD//wAA/////wAA////vwAAAAD///+/AAD//////78AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////vwAA//8AAKrp//8AAP//qukAAP////+q6f//AAAAAKrpVNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v////////////////wAA/38AAP9/AAD/fwAA/38ENfYVBDX2FQQ19hUENfYV")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_3fn5j")
+
+[node name="rampa_45" type="Node3D"]
+
+[node name="static_body" type="StaticBody3D" parent="."]
+
+[node name="rampa45_collider" type="CollisionShape3D" parent="static_body"]
+shape = SubResource("ConcavePolygonShape3D_thr6s")
+script = ExtResource("1_xl7oc")
+
+[node name="rampa45_collider_rampa" type="MeshInstance3D" parent="static_body/rampa45_collider"]
+mesh = SubResource("ArrayMesh_es3v4")
+skeleton = NodePath("")

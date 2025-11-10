@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://brxbmi13xghc3"
+uid="uid://kqe80vk1chdo"
 path="res://.godot/imported/level_test.glb-d8d1e2081f2f0e8bc328fd6cf4cbaacc.scn"
 
 [deps]
@@ -22,7 +22,7 @@ nodes/use_node_type_suffixes=true
 meshes/ensure_tangents=true
 meshes/generate_lods=true
 meshes/create_shadow_meshes=true
-meshes/light_baking=1
+meshes/light_baking=2
 meshes/lightmap_texel_size=0.2
 meshes/force_disable_compression=false
 skins/use_named_skins=true
@@ -32,6 +32,13 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
-_subresources={}
+_subresources={
+"materials": {
+"vidro": {
+"use_external/enabled": true,
+"use_external/path": "uid://mrajmy3r711c"
+}
+}
+}
 gltf/naming_version=1
 gltf/embedded_image_handling=1

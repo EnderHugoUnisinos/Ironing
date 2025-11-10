@@ -1,13 +1,13 @@
 [gd_scene load_steps=18 format=3 uid="uid://1leop00d28at"]
 
-[ext_resource type="Script" uid="uid://6radik61hocj" path="res://scenes/main_menu.gd" id="1_8ln24"]
-[ext_resource type="Texture2D" uid="uid://kpvpa4pqdbao" path="res://assets/images/menu_art.png" id="1_l6cm7"]
+[ext_resource type="Script" uid="uid://6radik61hocj" path="res://scenes/menus/main_menu.gd" id="1_8ln24"]
+[ext_resource type="Texture2D" uid="uid://fulnx6r0ap1v" path="res://assets/images/menu_background.png" id="2_50h1w"]
 [ext_resource type="FontFile" uid="uid://b2pl8ephfxo3p" path="res://assets/fonts/pixel_rpg.ttf" id="2_ekxnf"]
 [ext_resource type="PackedScene" uid="uid://bx3tvo04373em" path="res://scenes/menus/level_choice.tscn" id="3_bqqt6"]
-[ext_resource type="Script" uid="uid://405e344ekxck" path="res://scenes/start_button.gd" id="3_wu84c"]
-[ext_resource type="Script" uid="uid://xad0cymbtiou" path="res://scenes/options_button.gd" id="5_oa1go"]
-[ext_resource type="Script" uid="uid://bivbamyev83ha" path="res://scenes/quit_button.gd" id="6_tbmy8"]
-[ext_resource type="Script" uid="uid://chr3destdkxwj" path="res://scenes/options.gd" id="8_jk1qb"]
+[ext_resource type="Script" uid="uid://405e344ekxck" path="res://scenes/menus/start_button.gd" id="3_wu84c"]
+[ext_resource type="Script" uid="uid://xad0cymbtiou" path="res://scenes/menus/options_button.gd" id="5_oa1go"]
+[ext_resource type="Script" uid="uid://bivbamyev83ha" path="res://scenes/menus/quit_button.gd" id="6_tbmy8"]
+[ext_resource type="Script" uid="uid://chr3destdkxwj" path="res://scenes/menus/options.gd" id="8_jk1qb"]
 [ext_resource type="PackedScene" uid="uid://dv3vbsirhr0io" path="res://scenes/options/option_container.tscn" id="8_tbmy8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bqqt6"]
@@ -37,12 +37,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_8ln24")
 
 [node name="MenuArt" type="Sprite2D" parent="."]
 position = Vector2(580, 326)
 scale = Vector2(0.611574, 0.611574)
-texture = ExtResource("1_l6cm7")
+texture = ExtResource("2_50h1w")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -51,7 +53,7 @@ offset_top = 363.0
 offset_right = 465.0
 offset_bottom = 604.0
 rotation = 0.646451
-color = Color(0, 0.796078, 0.862745, 0.286275)
+color = Color(0, 0.796078, 0.862745, 0.666667)
 
 [node name="start_button" type="Button" parent="."]
 custom_minimum_size = Vector2(150, 25)
@@ -163,6 +165,7 @@ offset_bottom = 40.0
 script = ExtResource("8_jk1qb")
 
 [node name="Panel" type="Panel" parent="Options"]
+layout_mode = 0
 offset_left = 339.0
 offset_top = 117.0
 offset_right = 557.0
