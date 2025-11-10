@@ -4,7 +4,7 @@
 [ext_resource type="Shader" uid="uid://tf3oy01d6euh" path="res://objects/not_ready/glowing.gdshader" id="2_e6pke"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_x6me6"]
-size = Vector3(2.9, 1.4, 2.9)
+size = Vector3(0.318604, 0.31062, 0.310547)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l6vu8"]
 resource_name = "colormap"
@@ -48,12 +48,12 @@ shadow_mesh = SubResource("ArrayMesh_8utmq")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cntsb"]
 render_priority = 0
 shader = ExtResource("2_e6pke")
-shader_parameter/outline_color = Color(0.517647, 1, 0.686275, 1)
+shader_parameter/outline_color = Color(4.04298e-06, 0.542831, 0.81205, 1)
 shader_parameter/emission_strength = 40.0
 shader_parameter/is_highlighted = true
 shader_parameter/pulse_speed = 2.0
 shader_parameter/min_height = -1.0
-shader_parameter/max_height = 3.0
+shader_parameter/max_height = 0.25
 
 [sub_resource type="Animation" id="Animation_cntsb"]
 length = 0.001
@@ -87,11 +87,11 @@ _data = {
 script = ExtResource("1_q58tr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.81092, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.154145, 0)
 shape = SubResource("BoxShape3D_x6me6")
 
 [node name="indicator-round-a2" type="Node3D" parent="."]
-transform = Transform3D(3, 0, 0, 0, 15.207, 0, 0, 0, 3, 0, -0.00550988, 0)
+transform = Transform3D(0.3, 0, 0, 0, 1.521, 0, 0, 0, 0.3, 0, -0.00550988, 0)
 
 [node name="indicator-round-a" type="Node3D" parent="indicator-round-a2"]
 

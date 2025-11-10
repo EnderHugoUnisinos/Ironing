@@ -1,10 +1,10 @@
 extends MovementBase
 
-@export var waddle_speed: float = 2.5
-@export var ironing_speed: float = 15.0
-@export var max_speed: float = 15.0
-@export var standing_jump_height: float = 4.0
-@export var ironing_jump_height: float = 5.0
+@export var waddle_speed: float = 0.5
+@export var ironing_speed: float = 2.0
+@export var max_speed: float = 10.0
+@export var standing_jump_height: float = 0.7
+@export var ironing_jump_height: float = 1
 @export var health: float = 50.0
 @export var cooldown: float = 1.2
 
@@ -18,6 +18,7 @@ extends MovementBase
 @onready var ground_ray = $GroundRay
 @onready var water_meter : ProgressBar = $Hud/WaterMeter
 @onready var end_pointer : RayCast3D = $CameraPivot/Camera3D/EndPointer
+@onready var decal : Decal = $Decal
 
 @export var stage_end : Node3D
 
@@ -32,6 +33,7 @@ var last_floor_normal: Vector3
 var last_floor_point: Vector3
 var last_grounded_velocity: Vector3
 var current_floor_collider: CollisionShape3D
+var decal_size = 0.2
 
 func _ready() -> void:
 	last_y_position = self.global_position.y
@@ -46,6 +48,7 @@ func switch_mode(switch_mode):
 		collision_ironing.disabled = false
 		collision_standing.disabled = true
 		self.floor_stop_on_slope = false
+		decal_size = 0.3
 	elif switch_mode == iron_mode.STANDING :
 		timer.start(cooldown)
 		current_mode = iron_mode.STANDING
@@ -54,9 +57,13 @@ func switch_mode(switch_mode):
 		collision_ironing.disabled = true
 		collision_standing.disabled = false
 		self.floor_stop_on_slope = true
+		decal_size = 0.2
 
 func _process(delta: float) -> void:
-	end_pointer.look_at(stage_end.global_position)
+	var end_pos = Vector3.ZERO
+	if stage_end:
+		end_pos = stage_end.global_position
+	end_pointer.look_at(end_pos)
 	if (self.velocity.x > 0.01 or self.velocity.x < -0.01) or (self.velocity.z > 0.01 or self.velocity.z < -0.01):
 		walk = true
 	else:
@@ -68,7 +75,10 @@ func _process(delta: float) -> void:
 		elif !Input.is_action_pressed("special"):
 			if timer.time_left == 0 and is_on_floor() and current_mode != iron_mode.STANDING:
 				switch_mode(iron_mode.STANDING)
-
+	if decal.size.z != decal_size and timer.time_left < 0.2:
+		decal.size.z = move_toward(decal.size.z, decal_size, delta)
+		decal.size.x = move_toward(decal.size.x, decal_size, delta)
+	
 func _physics_process(delta: float) -> void:
 	if water_meter.value <= 0:
 		if current_mode == iron_mode.IRONING:
@@ -79,16 +89,6 @@ func _physics_process(delta: float) -> void:
 		Input.get_action_strength("right") - Input.get_action_strength("left"),
 		Input.get_action_strength("forward") - Input.get_action_strength("backward")
 	)
-	if is_on_floor():
-		jumping = false
-		#region reset surface changes
-		if current_mode == iron_mode.IRONING:
-			current_speed = ironing_speed
-			current_jump_height = ironing_jump_height
-		else:
-			current_speed = waddle_speed
-			current_jump_height = standing_jump_height
-		#endregion
 	if input_vec.length() > 0:
 		input_vec = input_vec.normalized()
 		if current_floor_collider:
@@ -104,7 +104,7 @@ func _physics_process(delta: float) -> void:
 		
 		cam_forward = cam_forward.slide(last_floor_normal.normalized()).normalized()
 		cam_right = cam_right.slide(last_floor_normal.normalized()).normalized()
-
+		
 		var direction := (cam_forward * input_vec.y) + (cam_right * input_vec.x)
 		direction = direction.slide(last_floor_normal)
 		#direction.y += 0.1
@@ -116,9 +116,8 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, direction.x*current_speed, (current_speed * delta)+abs(direction.x)*delta*10)
 			velocity.y =  clamp(velocity.y + (direction.y * current_speed * delta * 5), -max_speed, max_speed)
 			velocity.z = move_toward(velocity.z, direction.z*current_speed, (current_speed * delta)+abs(direction.z)*delta*10)
-			
 		character_pivot.rotation.y = rotate_toward(character_pivot.rotation.y, atan2(-velocity.x,-velocity.z)+(randf()*0.02), 0.5)
-		if timer.time_left > 0:
+		if timer.time_left > 0 and is_on_floor():
 			velocity.x = move_toward(velocity.x, 0, 0.02)
 			velocity.z = move_toward(velocity.z, 0, 0.02)
 	else:
@@ -129,8 +128,18 @@ func _physics_process(delta: float) -> void:
 			else:
 				velocity -= velocity * min(delta/0.1, 1.0)
 		else:
-			velocity -= velocity * min(delta/0.9, 1.0)
+			velocity -= velocity * min(delta/4, 1.0)
 	
+	if is_on_floor():
+		jumping = false
+		#region reset surface changes
+		if current_mode == iron_mode.IRONING:
+			current_speed = ironing_speed
+			current_jump_height = ironing_jump_height
+		else:
+			current_speed = waddle_speed
+			current_jump_height = standing_jump_height
+		#endregion
 	if Input.is_action_just_pressed("jump") and !jumping:
 		if current_floor_collider:
 			if current_floor_collider.get_script():
@@ -141,7 +150,7 @@ func _physics_process(delta: float) -> void:
 		jumping = true
 	##Gravity
 	if !is_on_floor():
-		velocity.y = velocity.y - (11.2*delta)
+		velocity.y = velocity.y - (2.5*delta)
 	if !self.is_on_floor():
 		var n = Vector3.UP.normalized()
 		var xform = align_with_y(character_pivot.transform, n)

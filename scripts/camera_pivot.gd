@@ -2,6 +2,7 @@ extends Node3D  # This script goes on the Pivot node
 
 @onready var player = $".."
 @onready var camera = $Camera3D
+@onready var camera_ray : RayCast3D = $"CameraRay"
 @export var mouse_sensitivity := 0.3
 @export var gamepad_sensitivity := 2.0
 @export var gamepad_deadzone := 0.15
@@ -15,6 +16,10 @@ func _input(event):
 
 func _process(delta: float) -> void:
 		# Handle gamepad look
+	if camera_ray.is_colliding():
+		camera.global_position = camera_ray.get_collision_point()
+	else:
+		camera.global_position = camera_ray.to_global(camera_ray.target_position)
 	self.global_position = player.global_position
 	var gamepad_input = Input.get_axis("look_left", "look_right")
 	

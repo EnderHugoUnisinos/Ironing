@@ -1,6 +1,7 @@
-[gd_scene load_steps=48 format=4 uid="uid://cp8242762l2nq"]
+[gd_scene load_steps=49 format=4 uid="uid://cp8242762l2nq"]
 
 [ext_resource type="Script" uid="uid://diqp3b7x3sit7" path="res://scripts/player.gd" id="1_mkvct"]
+[ext_resource type="Material" uid="uid://by3uskhst6gmp" path="res://assets/materials/vapor.tres" id="2_0jwta"]
 [ext_resource type="Script" uid="uid://ihxquk3vhpsl" path="res://scripts/camera_pivot.gd" id="2_7de08"]
 [ext_resource type="Script" uid="uid://dfq3ixu3fvvn6" path="res://objects/rotation.gd" id="2_ikjww"]
 [ext_resource type="Script" uid="uid://bvyat61m0sgej" path="res://scripts/options/open_menu.gd" id="4_ikjww"]
@@ -8,23 +9,24 @@
 [ext_resource type="Material" uid="uid://bfiqw4514fh2v" path="res://assets/materials/pointer.tres" id="4_lg115"]
 [ext_resource type="PackedScene" uid="uid://bcpqjncy5w73y" path="res://scenes/options/menu_container.tscn" id="5_leroj"]
 [ext_resource type="Script" uid="uid://ccn5kxfvvt6pj" path="res://objects/time_meter.gd" id="5_vh2yd"]
+[ext_resource type="Texture2D" uid="uid://cupj8nynfndgq" path="res://assets/textures/Shadow.png" id="9_nt7xg"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7de08"]
+emission_shape_scale = Vector3(1, 0.075, 1.09)
 emission_shape = 3
-emission_box_extents = Vector3(0.2, 0.05, 0.435)
-angle_min = 1.07288e-05
-angle_max = 360.0
+emission_box_extents = Vector3(0.036, 0.05, 0.077)
+angle_min = -72.8
+angle_max = 452.3
 spread = 180.0
 flatness = 1.0
 initial_velocity_min = 0.5
 initial_velocity_max = 1.0
+scale_min = 0.0
+scale_max = 10.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7de08"]
-billboard_mode = 1
-
-[sub_resource type="QuadMesh" id="QuadMesh_7de08"]
-material = SubResource("StandardMaterial3D_7de08")
-size = Vector2(0.05, 0.05)
+[sub_resource type="QuadMesh" id="QuadMesh_0jwta"]
+material = ExtResource("2_0jwta")
+size = Vector2(0.008, 0.008)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4gd36"]
 resource_name = "ND_ID_MAT_WHITE"
@@ -346,11 +348,11 @@ transitions = ["Start", "Idle_Up", SubResource("AnimationNodeStateMachineTransit
 graph_offset = Vector2(-455.5, 35)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7de08"]
-radius = 0.4
+radius = 0.0812518
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7de08"]
-radius = 0.308645
-height = 1.04488
+radius = 0.0415051
+height = 0.184956
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_hmgma"]
 _surfaces = [{
@@ -392,29 +394,28 @@ anti_aliasing_size = 5.0
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k660p"]
 bg_color = Color(0.392157, 0.643137, 0.839216, 1)
 
-[node name="Character_Iron" type="CharacterBody3D"]
+[node name="Character_Iron" type="CharacterBody3D" groups=["player"]]
 script = ExtResource("1_mkvct")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0438773, 0)
+transform = Transform3D(0.703755, 0, 0, 0, 1, 0, 0, 0, 0.648416, 0, 0.00255957, 0)
 emitting = false
 amount = 20
 lifetime = 0.5
 interp_to_end = 0.1
 one_shot = true
-speed_scale = 1.2
 explosiveness = 1.0
 visibility_aabb = AABB(-1, -1, -1, 2, 2, 2)
 process_material = SubResource("ParticleProcessMaterial_7de08")
-draw_pass_1 = SubResource("QuadMesh_7de08")
+draw_pass_1 = SubResource("QuadMesh_0jwta")
 
 [node name="GroundRay" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0110624, -0.0103748)
-target_position = Vector3(0, -0.25, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00523492, -0.0103748)
+target_position = Vector3(0, -0.05, 0)
 
 [node name="UpRay" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0239416, -0.0103748)
-target_position = Vector3(0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.155477, -0.0103748)
+target_position = Vector3(0, 0.05, 0)
 
 [node name="CharacterPivot" type="Node3D" parent="."]
 
@@ -422,6 +423,7 @@ target_position = Vector3(0, 1, 0)
 script = ExtResource("2_ikjww")
 
 [node name="Armature" type="Node3D" parent="CharacterPivot/Iron"]
+transform = Transform3D(0.18, 0, 0, 0, 0.18, 0, 0, 0, 0.18, 0, 0, 0)
 
 [node name="Skeleton3D" type="Skeleton3D" parent="CharacterPivot/Iron/Armature"]
 bones/0/name = "Base_2"
@@ -437,9 +439,10 @@ bones/1/rest = Transform3D(0.995384, -0.000458166, 0.0959706, 0.0905516, -0.3268
 bones/1/enabled = true
 bones/1/position = Vector3(-6.91931e-05, 0.627705, 0.212109)
 bones/1/rotation = Quaternion(0.813552, 0.0276852, 0.0392619, 0.579504)
-bones/1/scale = Vector3(1, 1, 1)
+bones/1/scale = Vector3(1, 1, 0.999999)
 
 [node name="Base" type="MeshInstance3D" parent="CharacterPivot/Iron/Armature/Skeleton3D"]
+layers = 4
 mesh = SubResource("ArrayMesh_q8v0g")
 skin = SubResource("Skin_1ydmh")
 
@@ -454,23 +457,23 @@ advance_expression_base_node = NodePath("../../..")
 anim_player = NodePath("../AnimationPlayer")
 
 [node name="FrontRay" type="RayCast3D" parent="CharacterPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 6.35722e-08, 0, -6.35722e-08, 1, 0, 0.0109474, -0.420652)
-target_position = Vector3(0, -0.25, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 6.35722e-08, 0, -6.35722e-08, 1, 0, 0.0307679, -0.0619919)
+target_position = Vector3(0, -0.1, 0)
 
 [node name="RearRay" type="RayCast3D" parent="CharacterPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0109474, 0.399362)
-target_position = Vector3(0, -0.25, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.029069, 0.0540211)
+target_position = Vector3(0, -0.1, 0)
 
 [node name="LeftRay" type="RayCast3D" parent="CharacterPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.194925, 0.0792541, -0.0103748)
-target_position = Vector3(-0.5, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0439174, 0.0792541, -0.0103748)
+target_position = Vector3(-0.1, 0, 0)
 
 [node name="RightRay" type="RayCast3D" parent="CharacterPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.197446, 0.0792541, -0.0103748)
-target_position = Vector3(0.5, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0448976, 0.0792541, -0.0103748)
+target_position = Vector3(0.1, 0, 0)
 
 [node name="CollisionIroning" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0.4025, -0.00220372)
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0.0814103, -0.00220372)
 shape = SubResource("SphereShape3D_7de08")
 disabled = true
 
@@ -478,7 +481,7 @@ disabled = true
 one_shot = true
 
 [node name="CollisionStanding" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.516602, 0.00371686)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0918962, 0.00371686)
 shape = SubResource("CapsuleShape3D_7de08")
 
 [node name="CameraPivot" type="Node3D" parent="."]
@@ -486,18 +489,22 @@ transform = Transform3D(1, 0, 2.13163e-14, 0, 1, 0, -2.13163e-14, 0, 1, 0, 0, 0)
 script = ExtResource("2_7de08")
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
-transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 1.48724, 2.1712)
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 3.88714e-14, 0.321535, 0.347648)
 current = true
 
 [node name="EndPointer" type="RayCast3D" parent="CameraPivot/Camera3D"]
-transform = Transform3D(1, -2.4564e-20, 2.20229e-20, 7.6233e-21, 1, 0, 3.38813e-21, 0, 1, 1.08232e-14, -0.824726, -1.58723)
-target_position = Vector3(0, 0, -1)
+transform = Transform3D(1, -2.4564e-20, 2.20229e-20, 7.6233e-21, 1, 0, 3.38813e-21, 0, 1, -2.67336e-15, -0.155924, -0.29898)
+target_position = Vector3(0, 0, -0.1)
 
 [node name="Pointer" type="MeshInstance3D" parent="CameraPivot/Camera3D/EndPointer"]
-transform = Transform3D(3, -2.5411e-21, -5.0822e-21, 2.5411e-21, 3, -4.30479e-42, 5.0822e-21, 0, 3, 0, 0, 0)
+transform = Transform3D(0.5, -4.23517e-22, -8.47033e-22, 4.23517e-22, 0.5, -7.17465e-43, 8.47033e-22, 0, 0.5, 0, 0, 0)
 ignore_occlusion_culling = true
 mesh = SubResource("ArrayMesh_ownxy")
 skeleton = NodePath("")
+
+[node name="CameraRay" type="RayCast3D" parent="CameraPivot"]
+transform = Transform3D(1, 1.73427e-14, 1.23942e-14, 2.11758e-22, -0.581442, 0.813588, 2.13163e-14, -0.813588, -0.581442, 0, 0.0592386, 0)
+target_position = Vector3(0, -0.5, 0)
 
 [node name="Hud" type="Control" parent="."]
 layout_mode = 3
@@ -545,3 +552,12 @@ script = ExtResource("4_ikjww")
 layout_mode = 1
 offset_right = 1112.0
 offset_bottom = 608.0
+
+[node name="Decal" type="Decal" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.235998, 0)
+size = Vector3(0.2, 0.5, 0.2)
+texture_albedo = ExtResource("9_nt7xg")
+modulate = Color(1, 1, 1, 0.560784)
+upper_fade = 0.00597451
+lower_fade = 0.00735548
+cull_mask = 1048571
