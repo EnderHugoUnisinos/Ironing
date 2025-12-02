@@ -1,9 +1,9 @@
 extends Area3D
-@export_file("*.tscn") var next_level : String
+@export_enum("GARAGEM","SALA","MENU") var next_level : int
 
-func _next_level():
-	get_tree().call_deferred("change_scene_to_file", next_level)
+func end_level_screen():
+	get_tree().current_scene.end_level()
 
 func _on_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
-		_next_level()
+		end_level_screen()

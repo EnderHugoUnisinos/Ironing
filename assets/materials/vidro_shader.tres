@@ -1,0 +1,22 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://tthl0dfc1mkd"]
+
+[ext_resource type="Shader" uid="uid://bj3ufa1ph4cy3" path="res://assets/shaders/vidro.gdshader" id="1_c53hs"]
+
+[sub_resource type="Gradient" id="Gradient_s73la"]
+colors = PackedColorArray(0.396889, 0.396889, 0.396889, 1, 0.903598, 0.903598, 0.903598, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2jcxq"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_c53hs"]
+in_3d_space = true
+color_ramp = SubResource("Gradient_s73la")
+noise = SubResource("FastNoiseLite_2jcxq")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_c53hs")
+shader_parameter/albedo = Color(1, 1, 1, 0)
+shader_parameter/roughness = 0.15
+shader_parameter/normal_strength = 1.0
+shader_parameter/normal_map = SubResource("NoiseTexture2D_c53hs")
+shader_parameter/edge_color = Color(0, 0, 0, 1)

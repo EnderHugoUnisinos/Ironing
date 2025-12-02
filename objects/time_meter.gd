@@ -12,4 +12,5 @@ func _process(delta: float) -> void:
 	var minutes := time_elapsed / 60
 	var seconds := fmod(time_elapsed, 60)
 	var milliseconds := fmod(time_elapsed, 1) * 100
-	self.text = "%02d:%02d:%02d" % [minutes, seconds, milliseconds]
+	get_tree().current_scene.level_time = "%02d:%02d:%02d" % [minutes, seconds, milliseconds]
+	self.text = get_tree().current_scene.level_time 

@@ -16,7 +16,7 @@ extends MovementBase
 @onready var collision_ironing = $CollisionIroning
 @onready var collision_standing = $CollisionStanding
 @onready var ground_ray = $GroundRay
-@onready var water_meter : ProgressBar = $Hud/WaterMeter
+@onready var water_meter : ProgressBar = $Hud/WaterMask/WaterMeter
 @onready var end_pointer : RayCast3D = $CameraPivot/Camera3D/EndPointer
 @onready var decal : Decal = $Decal
 
@@ -60,6 +60,7 @@ func switch_mode(switch_mode):
 		decal_size = 0.2
 
 func _process(delta: float) -> void:
+	get_tree().current_scene.water_level = "%.0f%%" % water_meter.value
 	var end_pos = Vector3.ZERO
 	if stage_end:
 		end_pos = stage_end.global_position

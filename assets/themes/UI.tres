@@ -1,0 +1,16 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://djcrnay6w2kfn"]
+
+[ext_resource type="FontFile" uid="uid://dl2ykeiw8imoo" path="res://assets/fonts/Ghrathe.ttf" id="1_an54w"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_an54w"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_huopn"]
+bg_color = Color(0, 0.607423, 0.981917, 0.466667)
+
+[resource]
+Label/font_sizes/font_size = 64
+Label/fonts/font = ExtResource("1_an54w")
+ProgressBar/font_sizes/font_size = 16
+ProgressBar/fonts/font = ExtResource("1_an54w")
+ProgressBar/styles/background = SubResource("StyleBoxEmpty_an54w")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_huopn")

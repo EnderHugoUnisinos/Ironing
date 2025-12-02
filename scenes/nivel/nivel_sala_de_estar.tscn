@@ -1,7 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://q41cicl0dn53"]
+[gd_scene load_steps=25 format=3 uid="uid://q41cicl0dn53"]
 
 [ext_resource type="PackedScene" uid="uid://beim7cjedya4u" path="res://assets/level_imports/sala_de_estar.tscn" id="1_bgqvg"]
-[ext_resource type="PackedScene" uid="uid://dlrmy2hyvdsfe" path="res://objects/not_ready/end_level.tscn" id="2_trvq3"]
+[ext_resource type="Script" uid="uid://g8rkbrglt7ro" path="res://scenes/nivel/level_manager.gd" id="1_us0c6"]
+[ext_resource type="Script" uid="uid://cjvu0q2j5dfph" path="res://objects/not_ready/end_level.gd" id="2_trvq3"]
+[ext_resource type="Shader" uid="uid://tf3oy01d6euh" path="res://objects/not_ready/glowing.gdshader" id="3_3h7ct"]
+[ext_resource type="Texture2D" uid="uid://qe35wu3yl3n7" path="res://assets/textures/skybox_livingroom.png" id="3_36kwo"]
 [ext_resource type="PackedScene" uid="uid://cp8242762l2nq" path="res://objects/character_iron.tscn" id="3_us0c6"]
 [ext_resource type="LightmapGIData" uid="uid://cy60uqimxh5mf" path="res://assets/lightmaps/sala_de_estar.lmbake" id="4_3h7ct"]
 [ext_resource type="PackedScene" uid="uid://lliqn6g28fcj" path="res://objects/roupas/pano.tscn" id="5_36kwo"]
@@ -14,13 +17,18 @@
 [ext_resource type="PackedScene" uid="uid://btwos4rd3e57o" path="res://objects/orbe_agua.tscn" id="12_63an3"]
 [ext_resource type="PackedScene" uid="uid://bxqfii2n8w76y" path="res://objects/orbe_spawn.tscn" id="13_v1a2s"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kyj0h"]
-sky_top_color = Color(0.514399, 0.653245, 0.718112, 1)
-ground_bottom_color = Color(0.136376, 0.0941148, 0.0581589, 1)
-energy_multiplier = 2.0
+[sub_resource type="Curve3D" id="Curve3D_36kwo"]
+_data = {
+"points": PackedVector3Array(0.479121, 0.0607877, -0.00950742, -2.809, -0.061, 0.075, 1.74714, 0.211352, 1.13482, -1.095, -0.015, -0.9, 0.795, 0, 1.055, 1.29446, 0.24833, 0.384892, 0.025, 0, -0.685, -0.235, -0.025, 0.915, 0.567969, 0.163831, 2.65031, -0.94, 0.425, 0, 0, 0, 0, 4.91114, -0.340693, 2.48774),
+"tilts": PackedFloat32Array(0.15, 0, -0.195, 0)
+}
+point_count = 4
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_62mwj"]
+panorama = ExtResource("3_36kwo")
 
 [sub_resource type="Sky" id="Sky_tecsi"]
-sky_material = SubResource("ProceduralSkyMaterial_kyj0h")
+sky_material = SubResource("PanoramaSkyMaterial_62mwj")
 
 [sub_resource type="Environment" id="Environment_2g6q7"]
 background_mode = 2
@@ -37,7 +45,40 @@ volumetric_fog_density = 0.2236
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_tecsi"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_trvq3"]
+size = Vector3(0.51, 0.45, 1.285)
+
+[sub_resource type="BoxMesh" id="BoxMesh_q58tr"]
+flip_faces = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_trvq3"]
+render_priority = 0
+shader = ExtResource("3_3h7ct")
+shader_parameter/outline_color = Color(0, 0.764706, 0.32549, 1)
+shader_parameter/emission_strength = 10.542
+shader_parameter/is_highlighted = true
+shader_parameter/pulse_speed = 2.0
+shader_parameter/min_height = -1.0
+shader_parameter/max_height = 0.256
+
 [node name="SalaDeEstar" type="Node3D"]
+script = ExtResource("1_us0c6")
+
+[node name="IntroPath" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.51666, 0.844281, -3.41301)
+curve = SubResource("Curve3D_36kwo")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="IntroPath"]
+transform = Transform3D(-9.88497e-06, 0.411896, 0.911059, -8.70126e-07, 0.911046, -0.411902, -0.999846, -4.86505e-06, -8.64871e-06, 4.88436, -0.399918, 2.74274)
+progress = 10.7319
+h_offset = -0.255
+v_offset = -0.065
+rotation_mode = 2
+use_model_front = true
+loop = false
+
+[node name="Camera3D" type="Camera3D" parent="IntroPath/PathFollow3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="sala_de_estar" parent="." instance=ExtResource("1_bgqvg")]
 
@@ -106,21 +147,25 @@ shadow_enabled = true
 spot_range = 8.95303
 spot_angle = 25.765
 
-[node name="EndDetect" parent="." instance=ExtResource("2_trvq3")]
+[node name="EndDetect" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.25072, 0.716362, -3.50261)
-next_level = "uid://1leop00d28at"
+script = ExtResource("2_trvq3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EndDetect"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.104, 0.355, 0.149)
+shape = SubResource("BoxShape3D_trvq3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="EndDetect"]
+transform = Transform3D(0.51, 0, 0, 0, 0.45, 0, 0, 0, 1.285, -0.104, 0.355, 0.149)
+mesh = SubResource("BoxMesh_q58tr")
+surface_material_override/0 = SubResource("ShaderMaterial_trvq3")
 
 [node name="Character_Iron" parent="." node_paths=PackedStringArray("stage_end") instance=ExtResource("3_us0c6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.87157, 0.0186346, -0.75703)
+visible = false
 floor_max_angle = 1.0472
 floor_snap_length = 0.5
 stage_end = NodePath("../EndDetect")
-
-[node name="LightmapGI" type="LightmapGI" parent="."]
-quality = 2
-supersampling = true
-bounces = 4
-light_data = ExtResource("4_3h7ct")
 
 [node name="pano2" parent="." instance=ExtResource("5_36kwo")]
 transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, -2.03536, 0.00500019, -2.69227)
@@ -133,6 +178,7 @@ transform = Transform3D(-0.498034, 0, -0.867158, 0, 1, 0, 0.867158, 0, -0.498034
 
 [node name="camiseta_22" parent="." instance=ExtResource("7_ix256")]
 transform = Transform3D(0.161911, 0.448958, -0.878761, 0.0198506, 0.888849, 0.457769, 0.986605, -0.0915619, 0.135002, 0.708688, 0.536897, 0.661055)
+visible = false
 
 [node name="pano4" parent="." instance=ExtResource("5_36kwo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.80331, 0.00499971, 0.865682)
@@ -160,6 +206,7 @@ transform = Transform3D(0.599373, 0, 0.80047, 0, 1, 0, -0.80047, 0, 0.599373, -0
 
 [node name="rampa_36" parent="." instance=ExtResource("9_wxxvs")]
 transform = Transform3D(0.969629, 0, -0.24458, 0, 1, 0, 0.24458, 0, 0.969629, -0.804536, 0.814104, 0.664641)
+visible = false
 
 [node name="pano6" parent="." instance=ExtResource("5_36kwo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.03758, 0.689, -0.963607)
@@ -187,3 +234,12 @@ transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, -1.91826
 
 [node name="rampa_25" parent="." instance=ExtResource("10_3ukj6")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2.47301, 0.4371, 0.0212064)
+
+[node name="LightmapGI" type="LightmapGI" parent="."]
+quality = 2
+supersampling = true
+bounces = 4
+light_data = ExtResource("4_3h7ct")
+
+[connection signal="body_entered" from="EndDetect" to="EndDetect" method="_on_body_entered"]
+[connection signal="body_exited" from="EndDetect" to="EndDetect" method="_on_body_exited"]

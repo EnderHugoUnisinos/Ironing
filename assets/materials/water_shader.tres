@@ -1,0 +1,21 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://bpamhjr70i2qe"]
+
+[ext_resource type="Shader" uid="uid://br46glxmrqvs8" path="res://assets/shaders/water.gdshader" id="1_q066i"]
+
+[sub_resource type="Gradient" id="Gradient_q066i"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_4blnj"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_e7kmf"]
+color_ramp = SubResource("Gradient_q066i")
+noise = SubResource("FastNoiseLite_4blnj")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_q066i")
+shader_parameter/NOISE_PATTERN = SubResource("NoiseTexture2D_e7kmf")
+shader_parameter/color = Vector4(1, 1, 1, 1)
+shader_parameter/edge_color = Color(0, 0, 0, 1)
+shader_parameter/albedo = Color(0.383805, 0.612889, 0.818486, 0.304)
+shader_parameter/water_color = Color(0.0625, 0.1992, 0.3594, 1)
+shader_parameter/index_of_refraction = 1.333
