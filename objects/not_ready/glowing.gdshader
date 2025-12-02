@@ -17,18 +17,15 @@ void vertex() {
 
 void fragment() {
 	if (is_highlighted == true) {
-		float height = world_position.y - NODE_POSITION_WORLD.y;
+		float height = world_position.x - NODE_POSITION_WORLD.x;
 		float factor = clamp((height - min_height) / (max_height - min_height), 0.0, 1.0);
-
         float pulse = sqrt(pow(sin(TIME * pulse_speed), 2));
-
         float animated_emission = emission_strength * pulse;
-
         float alpha = pow(1.0 - dot(NORMAL, VIEW), 3);
 
 		EMISSION = outline_color.rgb * animated_emission;
 		ALBEDO = outline_color.rgb;
-		ALPHA = pow(1.0 - dot(NORMAL, VIEW), 3) * mix(0.8, 0, factor);
+		ALPHA = mix(0.2, 0, factor);
 	}
 	else
 	{

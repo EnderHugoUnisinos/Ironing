@@ -1,0 +1,528 @@
+[gd_scene load_steps=21 format=3 uid="uid://1leop00d28at"]
+
+[ext_resource type="Script" uid="uid://6radik61hocj" path="res://scenes/new_menus/main_menu.gd" id="1_8ln24"]
+[ext_resource type="Texture2D" uid="uid://fulnx6r0ap1v" path="res://assets/images/menu_background.png" id="2_50h1w"]
+[ext_resource type="Theme" uid="uid://1yf6uptoqp4m" path="res://assets/themes/menu_principal.tres" id="3_euy4r"]
+[ext_resource type="Script" uid="uid://b8erwmy5y55m2" path="res://scenes/new_menus/level_choice.gd" id="7_s30ul"]
+[ext_resource type="Theme" uid="uid://ltiqq82gt48x" path="res://assets/themes/menu.tres" id="8_y3jic"]
+[ext_resource type="Texture2D" uid="uid://iusvqri6j8a5" path="res://assets/images/level_01.png" id="9_85508"]
+[ext_resource type="Texture2D" uid="uid://2mnb81atk0i5" path="res://assets/images/level_02.png" id="10_n4tkw"]
+[ext_resource type="Script" uid="uid://cf0qk3j0ebuo5" path="res://scripts/options/window_mode_new.gd" id="12_gsbfq"]
+[ext_resource type="Script" uid="uid://cuuw8mfbrcg1v" path="res://scripts/options/hotkey_rebind_button.gd" id="12_y3jic"]
+[ext_resource type="Script" uid="uid://da31xqj5ipop3" path="res://scripts/options/resolution_mode_new.gd" id="13_pr5un"]
+[ext_resource type="Script" uid="uid://c1lmdsmwkhbx0" path="res://scripts/options/audio_slider_new.gd" id="14_knlmf"]
+
+[sub_resource type="GDScript" id="GDScript_s30ul"]
+script/source = "extends Button
+
+
+func _on_pressed() -> void:
+	$\"../Level_Choice\".visible = true
+"
+
+[sub_resource type="GDScript" id="GDScript_y3jic"]
+script/source = "extends Button
+
+func _on_pressed() -> void:
+	$\"../Options\".visible = true
+"
+
+[sub_resource type="GDScript" id="GDScript_85508"]
+script/source = "extends Button
+
+func _on_pressed() -> void:
+	get_tree().quit()
+"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cii0b"]
+texture = ExtResource("9_85508")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0a10y"]
+texture = ExtResource("10_n4tkw")
+
+[sub_resource type="GDScript" id="GDScript_n4tkw"]
+script/source = "extends Control
+
+func _on_option_container_options_menu_return() -> void:
+	self.visible = false
+
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed(\"open_menu\") and self.visible == true:
+		self.visible = false
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gsbfq"]
+bg_color = Color(0.056, 0.056, 0.056, 0.74)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pr5un"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gsbfq"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_8ln24")
+
+[node name="MenuArt" type="Sprite2D" parent="."]
+position = Vector2(580, 326)
+scale = Vector2(0.611574, 0.611574)
+texture = ExtResource("2_50h1w")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -21.0
+offset_top = 363.0
+offset_right = 465.0
+offset_bottom = 604.0
+rotation = 0.646451
+color = Color(0, 0.796078, 0.862745, 0.666667)
+
+[node name="start_button" type="Button" parent="."]
+custom_minimum_size = Vector2(150, 25)
+layout_mode = 0
+offset_left = 18.0
+offset_top = 440.0
+offset_right = 312.0
+offset_bottom = 491.0
+size_flags_horizontal = 4
+theme = ExtResource("3_euy4r")
+text = "Jogar"
+script = SubResource("GDScript_s30ul")
+
+[node name="options_button" type="Button" parent="."]
+custom_minimum_size = Vector2(150, 25)
+layout_mode = 0
+offset_left = 18.0
+offset_top = 509.0
+offset_right = 312.0
+offset_bottom = 560.0
+size_flags_horizontal = 4
+theme = ExtResource("3_euy4r")
+text = "Opções"
+script = SubResource("GDScript_y3jic")
+
+[node name="quit_button" type="Button" parent="."]
+custom_minimum_size = Vector2(150, 25)
+layout_mode = 0
+offset_left = 18.0
+offset_top = 580.0
+offset_right = 312.0
+offset_bottom = 631.0
+size_flags_horizontal = 4
+theme = ExtResource("3_euy4r")
+text = "Sair"
+script = SubResource("GDScript_85508")
+
+[node name="title_label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 315.0
+offset_top = 47.0
+offset_right = 815.0
+offset_bottom = 108.0
+theme = ExtResource("3_euy4r")
+text = "A Todo Vapor"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Level_Choice" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = -10.0
+offset_right = 25.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_s30ul")
+
+[node name="CenterContainer" type="CenterContainer" parent="Level_Choice"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.004
+anchor_top = 0.015
+anchor_right = 0.979
+anchor_bottom = 0.971
+offset_left = 0.272
+offset_top = -0.17
+offset_right = -0.177979
+offset_bottom = -0.338074
+
+[node name="PanelContainer" type="PanelContainer" parent="Level_Choice/CenterContainer"]
+custom_minimum_size = Vector2(450, 260)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Level_Choice/CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="Button" type="Button" parent="Level_Choice/CenterContainer/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(170, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("8_y3jic")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Level_Choice/CenterContainer/PanelContainer/HBoxContainer/Button"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -106.5
+offset_right = 100.0
+offset_bottom = 93.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 9
+alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Level_Choice/CenterContainer/PanelContainer/HBoxContainer/Button/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("8_y3jic")
+text = "Garagem"
+
+[node name="Panel" type="Panel" parent="Level_Choice/CenterContainer/PanelContainer/HBoxContainer/Button/VBoxContainer"]
+texture_filter = 6
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_cii0b")
+
+[node name="Button2" type="Button" parent="Level_Choice/CenterContainer/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(170, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("8_y3jic")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Level_Choice/CenterContainer/PanelContainer/HBoxContainer/Button2"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -106.5
+offset_right = 100.0
+offset_bottom = 93.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 9
+alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Level_Choice/CenterContainer/PanelContainer/HBoxContainer/Button2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("8_y3jic")
+text = "Sala"
+
+[node name="Panel" type="Panel" parent="Level_Choice/CenterContainer/PanelContainer/HBoxContainer/Button2/VBoxContainer"]
+texture_filter = 6
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_0a10y")
+
+[node name="Options" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_n4tkw")
+
+[node name="CenterContainer" type="CenterContainer" parent="Options"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Options/CenterContainer"]
+custom_minimum_size = Vector2(322, 396)
+layout_mode = 2
+
+[node name="TabContainer" type="TabContainer" parent="Options/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_y3jic")
+current_tab = 0
+
+[node name="Geral" type="TabBar" parent="Options/CenterContainer/VBoxContainer/TabContainer"]
+layout_mode = 2
+theme = ExtResource("8_y3jic")
+metadata/_tab_index = 0
+
+[node name="PanelContainer2" type="PanelContainer" parent="Options/CenterContainer/VBoxContainer/TabContainer/Geral"]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 319.0
+offset_bottom = 360.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_gsbfq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Options/CenterContainer/VBoxContainer/TabContainer/Geral/PanelContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HSeparator" type="HSeparator" parent="Options/CenterContainer/VBoxContainer/TabContainer/Geral/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 17
+theme_override_styles/separator = SubResource("StyleBoxEmpty_pr5un")
+
+[node name="GridContainer2" type="GridContainer" parent="Options/CenterContainer/VBoxContainer/TabContainer/Geral/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+columns = 3
+
+[node name="Label" type="Label" parent="Options/CenterContainer/VBoxContainer/TabContainer/Geral/PanelContainer2/VBoxContainer/GridContainer2"]
+layout_mode = 2
+theme = ExtResource("8_y3jic")
+text = "  Window   "
+
+[node name="HSeparator" type="HSeparator" parent="Options/CenterContainer/VBoxContainer/TabContainer/Geral/PanelContainer2/VBoxContainer/GridContainer2"]
+layout_mode = 2
+
+[node name="OptionButton" type="OptionButton" parent="Options/CenterContainer/VBoxContainer/TabContainer/Geral/PanelContainer2/VBoxContainer/GridContainer2"]
+layout_mode = 2
+theme = ExtResource("8_y3jic")
+alignment = 1
+selected = 0
+fit_to_longest_item = false
+item_count = 3
+popup/item_0/text = "fullscreen"
+popup/item_0/id = 0
+popup/item_1/text = "window"
+popup/item_1/id = 1
+popup/item_2/text = "borderless window"
+popup/item_2/id = 2
+script = ExtResource("12_gsbfq")
+
+[node name="Label2" type="Label" parent="Options/CenterContainer/VBoxContainer/TabContainer/Geral/PanelContainer2/VBoxContainer/GridContainer2"]
+layout_mode = 2
+theme = ExtResource("8_y3jic")
+text = "Resolution"
+
+[node name="HSeparator2" type="HSeparator" parent="Options/CenterContainer/VBoxContainer/TabContainer/Geral/PanelContainer2/VBoxContainer/GridContainer2"]
+layout_mode = 2
+
+[node name="OptionButton2" type="OptionButton" parent="Options/CenterContainer/VBoxContainer/TabContainer/Geral/PanelContainer2/VBoxContainer/GridContainer2"]
+layout_mode = 2
+alignment = 1
+selected = 0
+fit_to_longest_item = false
+item_count = 3
+popup/item_0/text = "1920x1080"
+popup/item_0/id = 0
+popup/item_1/text = "1280x720"
+popup/item_1/id = 0
+popup/item_2/text = "1366x738"
+popup/item_2/id = 1
+script = ExtResource("13_pr5un")
+
+[node name="GridContainer" type="GridContainer" parent="Options/CenterContainer/VBoxContainer/TabContainer/Geral/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 3
+
+[node name="Label" type="Label" parent="Options/CenterContainer/VBoxContainer/TabContainer/Geral/PanelContainer2/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Master"
+horizontal_alignment = 1
+
+[node name="Master" type="HSlider" parent="Options/CenterContainer/VBoxContainer/TabContainer/Geral/PanelContainer2/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+value = 1.0
+script = ExtResource("14_knlmf")
+bus_name = "Master"
+
+[node name="Master_Value" type="Label" parent="Options/CenterContainer/VBoxContainer/TabContainer/Geral/PanelContainer2/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "100%"
+
+[node name="Label2" type="Label" parent="Options/CenterContainer/VBoxContainer/TabContainer/Geral/PanelContainer2/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Musica"
+horizontal_alignment = 1
+
+[node name="Music" type="HSlider" parent="Options/CenterContainer/VBoxContainer/TabContainer/Geral/PanelContainer2/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+value = 1.0
+script = ExtResource("14_knlmf")
+bus_name = "Music"
+
+[node name="Music_Value" type="Label" parent="Options/CenterContainer/VBoxContainer/TabContainer/Geral/PanelContainer2/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "100%"
+
+[node name="Label3" type="Label" parent="Options/CenterContainer/VBoxContainer/TabContainer/Geral/PanelContainer2/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "SFX"
+horizontal_alignment = 1
+
+[node name="SFX" type="HSlider" parent="Options/CenterContainer/VBoxContainer/TabContainer/Geral/PanelContainer2/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+value = 1.0
+script = ExtResource("14_knlmf")
+bus_name = "SFX"
+
+[node name="SFX_Value" type="Label" parent="Options/CenterContainer/VBoxContainer/TabContainer/Geral/PanelContainer2/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "100%"
+
+[node name="Controles" type="TabBar" parent="Options/CenterContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("8_y3jic")
+metadata/_tab_index = 1
+
+[node name="PanelContainer2" type="PanelContainer" parent="Options/CenterContainer/VBoxContainer/TabContainer/Controles"]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 319.0
+offset_bottom = 360.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_gsbfq")
+
+[node name="GridContainer" type="GridContainer" parent="Options/CenterContainer/VBoxContainer/TabContainer/Controles/PanelContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("8_y3jic")
+columns = 2
+
+[node name="HSeparator" type="HSeparator" parent="Options/CenterContainer/VBoxContainer/TabContainer/Controles/PanelContainer2/GridContainer"]
+layout_mode = 2
+theme_override_constants/separation = 13
+theme_override_styles/separator = SubResource("StyleBoxEmpty_gsbfq")
+
+[node name="HSeparator2" type="HSeparator" parent="Options/CenterContainer/VBoxContainer/TabContainer/Controles/PanelContainer2/GridContainer"]
+layout_mode = 2
+theme_override_constants/separation = 13
+theme_override_styles/separator = SubResource("StyleBoxEmpty_gsbfq")
+
+[node name="Label" type="Label" parent="Options/CenterContainer/VBoxContainer/TabContainer/Controles/PanelContainer2/GridContainer"]
+layout_mode = 2
+text = "Frente"
+
+[node name="forward" type="Button" parent="Options/CenterContainer/VBoxContainer/TabContainer/Controles/PanelContainer2/GridContainer" groups=["hotkey_button"]]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme = ExtResource("8_y3jic")
+toggle_mode = true
+text = "W"
+script = ExtResource("12_y3jic")
+action_name = "forward"
+
+[node name="Label2" type="Label" parent="Options/CenterContainer/VBoxContainer/TabContainer/Controles/PanelContainer2/GridContainer"]
+layout_mode = 2
+text = "Trás"
+
+[node name="backward" type="Button" parent="Options/CenterContainer/VBoxContainer/TabContainer/Controles/PanelContainer2/GridContainer" groups=["hotkey_button"]]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme = ExtResource("8_y3jic")
+toggle_mode = true
+text = "S"
+script = ExtResource("12_y3jic")
+action_name = "backward"
+
+[node name="Label3" type="Label" parent="Options/CenterContainer/VBoxContainer/TabContainer/Controles/PanelContainer2/GridContainer"]
+layout_mode = 2
+text = "Esquerda"
+
+[node name="left" type="Button" parent="Options/CenterContainer/VBoxContainer/TabContainer/Controles/PanelContainer2/GridContainer" groups=["hotkey_button"]]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme = ExtResource("8_y3jic")
+toggle_mode = true
+text = "A"
+script = ExtResource("12_y3jic")
+action_name = "left"
+
+[node name="Label4" type="Label" parent="Options/CenterContainer/VBoxContainer/TabContainer/Controles/PanelContainer2/GridContainer"]
+layout_mode = 2
+text = "Direita"
+
+[node name="right" type="Button" parent="Options/CenterContainer/VBoxContainer/TabContainer/Controles/PanelContainer2/GridContainer" groups=["hotkey_button"]]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme = ExtResource("8_y3jic")
+toggle_mode = true
+text = "D"
+script = ExtResource("12_y3jic")
+action_name = "right"
+
+[node name="Label5" type="Label" parent="Options/CenterContainer/VBoxContainer/TabContainer/Controles/PanelContainer2/GridContainer"]
+layout_mode = 2
+text = "Pular"
+
+[node name="jump" type="Button" parent="Options/CenterContainer/VBoxContainer/TabContainer/Controles/PanelContainer2/GridContainer" groups=["hotkey_button"]]
+custom_minimum_size = Vector2(54, 20)
+layout_mode = 2
+theme = ExtResource("8_y3jic")
+toggle_mode = true
+text = "SPACE"
+script = ExtResource("12_y3jic")
+action_name = "jump"
+
+[node name="Label6" type="Label" parent="Options/CenterContainer/VBoxContainer/TabContainer/Controles/PanelContainer2/GridContainer"]
+layout_mode = 2
+text = "Passar"
+
+[node name="iron" type="Button" parent="Options/CenterContainer/VBoxContainer/TabContainer/Controles/PanelContainer2/GridContainer" groups=["hotkey_button"]]
+custom_minimum_size = Vector2(45, 20)
+layout_mode = 2
+theme = ExtResource("8_y3jic")
+toggle_mode = true
+text = "SHIFT"
+script = ExtResource("12_y3jic")
+action_name = "special"
+
+[node name="Label7" type="Label" parent="Options/CenterContainer/VBoxContainer/TabContainer/Controles/PanelContainer2/GridContainer"]
+layout_mode = 2
+text = "Reiniciar"
+
+[node name="reset" type="Button" parent="Options/CenterContainer/VBoxContainer/TabContainer/Controles/PanelContainer2/GridContainer" groups=["hotkey_button"]]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme = ExtResource("8_y3jic")
+toggle_mode = true
+text = "F5"
+script = ExtResource("12_y3jic")
+action_name = "reset"
+
+[connection signal="pressed" from="start_button" to="start_button" method="_on_pressed"]
+[connection signal="pressed" from="options_button" to="options_button" method="_on_pressed"]
+[connection signal="pressed" from="quit_button" to="quit_button" method="_on_pressed"]
+[connection signal="pressed" from="Level_Choice/CenterContainer/PanelContainer/HBoxContainer/Button" to="Level_Choice" method="_on_button_pressed"]
+[connection signal="pressed" from="Level_Choice/CenterContainer/PanelContainer/HBoxContainer/Button2" to="Level_Choice" method="_on_button_pressed"]
+[connection signal="pressed" from="Level_Choice/CenterContainer/PanelContainer/HBoxContainer/Button2" to="Level_Choice" method="_on_button_2_pressed"]

@@ -1,56 +1,34 @@
-class_name HotkeyRebindButton
 extends Control
 
-@onready var label: Label = $HBoxContainer/Label as Label
-@onready var button: Button = $HBoxContainer/Button as Button
-
 @export var action_name : String = ""
-@export var keybind_name : String = ""
+var current_state: bool = false;
 
 func _ready():
-	set_process_unhandled_key_input(false)
-	set_action_name()
-	set_text_for_key()
-
-
-func set_action_name() -> void:
-	label.text = keybind_name
-
-
-func set_text_for_key() -> void:
-	var action_events = InputMap.action_get_events(action_name)
-	var action_event = action_events[0]
-	var action_keycode = OS.get_keycode_string(action_event.physical_keycode)
+	var events = InputMap.action_get_events(action_name)
+	var event = events[0]
+	var key_text = event.as_text().to_upper()
+	if key_text.ends_with("(PHYSICAL)"):
+		key_text = key_text.replace("(PHYSICAL)", "").strip_edges()
+	self.text = key_text
 	
-	button.text = "%s" % action_keycode
-	
+	self.button_pressed = false
+	self.toggled.connect(_toggled)
 
-
-func _on_button_toggled(toggled_on: bool) -> void:
+func _toggled(toggled_on: bool):
+	current_state = toggled_on;
 	if toggled_on:
-		button.text = "Press any key..."
 		set_process_unhandled_key_input(toggled_on)
-		
-		for i in get_tree().get_nodes_in_group("hotkey_button"):
-			if i.action_name != self.action_name:
-				i.button.toggle_mode = false
-				i.set_process_unhandled_key_input(false)
 	else:
-		for i in get_tree().get_nodes_in_group("hotkey_button"):
-			if i.action_name != self.action_name:
-				i.button.toggle_mode = true
-				i.set_process_unhandled_key_input(false)
-				
-		set_text_for_key()
-	
+		set_process_unhandled_key_input(toggled_on)
+
+
 func _unhandled_key_input(event: InputEvent) -> void:
-	rebind_action_key(event)
-	button.button_pressed = false
+	if current_state:
+		rebind_action_key(event)
+	self.button_pressed = false
 	
 func rebind_action_key(event) -> void:
 	InputMap.action_erase_events(action_name)
 	InputMap.action_add_event(action_name, event)
-	
+	self.text = "%s" % OS.get_keycode_string(event.physical_keycode);
 	set_process_unhandled_key_input(false)
-	set_text_for_key()
-	set_action_name()

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpon88f6ratik"]
+
+[ext_resource type="Script" uid="uid://cha0spxwragew" path="res://scenes/scene_loader.gd" id="1_jtpn2"]
+[ext_resource type="PackedScene" uid="uid://40sfwxagc70r" path="res://scenes/new_menus/end_level.tscn" id="2_m85m7"]
+
+[node name="SceneLoader" type="Node3D"]
+process_mode = 3
+script = ExtResource("1_jtpn2")
+
+[node name="EndLevel" parent="." instance=ExtResource("2_m85m7")]
+process_mode = 3
+process_priority = 10
+visible = false
+z_index = 10
+y_sort_enabled = true

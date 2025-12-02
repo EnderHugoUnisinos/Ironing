@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cutva1epuhm24"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ucfmv"]
+
+[sub_resource type="Sky" id="Sky_w7474"]
+sky_material = SubResource("ProceduralSkyMaterial_ucfmv")
+
+[sub_resource type="Environment" id="Environment_47iej"]
+background_mode = 2
+sky = SubResource("Sky_w7474")
+ambient_light_sky_contribution = 0.0
+ambient_light_energy = 0.0
+reflected_light_source = 1
+glow_enabled = true
+glow_normalized = true
+fog_density = 0.047
+fog_height = 824.89
+fog_height_density = -1.1111
+volumetric_fog_density = 0.2236
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_e72fl"]
+
+[node name="Tutorial" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_47iej")
+camera_attributes = SubResource("CameraAttributesPractical_e72fl")
