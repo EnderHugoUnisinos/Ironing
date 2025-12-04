@@ -1,7 +1,7 @@
 [gd_scene load_steps=25 format=3 uid="uid://q41cicl0dn53"]
 
 [ext_resource type="PackedScene" uid="uid://beim7cjedya4u" path="res://assets/level_imports/sala_de_estar.tscn" id="1_bgqvg"]
-[ext_resource type="Script" uid="uid://g8rkbrglt7ro" path="res://scenes/nivel/level_manager.gd" id="1_us0c6"]
+[ext_resource type="Script" path="res://scenes/nivel/level_manager.gd" id="1_us0c6"]
 [ext_resource type="Script" uid="uid://cjvu0q2j5dfph" path="res://objects/not_ready/end_level.gd" id="2_trvq3"]
 [ext_resource type="Shader" uid="uid://tf3oy01d6euh" path="res://objects/not_ready/glowing.gdshader" id="3_3h7ct"]
 [ext_resource type="Texture2D" uid="uid://qe35wu3yl3n7" path="res://assets/textures/skybox_livingroom.png" id="3_36kwo"]
@@ -162,7 +162,6 @@ surface_material_override/0 = SubResource("ShaderMaterial_trvq3")
 
 [node name="Character_Iron" parent="." node_paths=PackedStringArray("stage_end") instance=ExtResource("3_us0c6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.87157, 0.0186346, -0.75703)
-visible = false
 floor_max_angle = 1.0472
 floor_snap_length = 0.5
 stage_end = NodePath("../EndDetect")
@@ -178,7 +177,6 @@ transform = Transform3D(-0.498034, 0, -0.867158, 0, 1, 0, 0.867158, 0, -0.498034
 
 [node name="camiseta_22" parent="." instance=ExtResource("7_ix256")]
 transform = Transform3D(0.161911, 0.448958, -0.878761, 0.0198506, 0.888849, 0.457769, 0.986605, -0.0915619, 0.135002, 0.708688, 0.536897, 0.661055)
-visible = false
 
 [node name="pano4" parent="." instance=ExtResource("5_36kwo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.80331, 0.00499971, 0.865682)
@@ -206,7 +204,6 @@ transform = Transform3D(0.599373, 0, 0.80047, 0, 1, 0, -0.80047, 0, 0.599373, -0
 
 [node name="rampa_36" parent="." instance=ExtResource("9_wxxvs")]
 transform = Transform3D(0.969629, 0, -0.24458, 0, 1, 0, 0.24458, 0, 0.969629, -0.804536, 0.814104, 0.664641)
-visible = false
 
 [node name="pano6" parent="." instance=ExtResource("5_36kwo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.03758, 0.689, -0.963607)
