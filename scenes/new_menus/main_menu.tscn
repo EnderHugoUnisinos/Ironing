@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://1leop00d28at"]
+[gd_scene load_steps=23 format=3 uid="uid://1leop00d28at"]
 
 [ext_resource type="Script" uid="uid://6radik61hocj" path="res://scenes/new_menus/main_menu.gd" id="1_8ln24"]
 [ext_resource type="Texture2D" uid="uid://fulnx6r0ap1v" path="res://assets/images/menu_background.png" id="2_50h1w"]
@@ -33,6 +33,12 @@ script/source = "extends Button
 func _on_pressed() -> void:
 	get_tree().quit()
 "
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_s30ul"]
+size = Vector2(256, 256)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s30ul"]
+texture = SubResource("PlaceholderTexture2D_s30ul")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cii0b"]
 texture = ExtResource("9_85508")
@@ -157,13 +163,54 @@ offset_right = -0.177979
 offset_bottom = -0.338074
 
 [node name="PanelContainer" type="PanelContainer" parent="Level_Choice/CenterContainer"]
-custom_minimum_size = Vector2(450, 260)
+custom_minimum_size = Vector2(700, 260)
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Level_Choice/CenterContainer/PanelContainer"]
 layout_mode = 2
 theme_override_constants/separation = 40
 alignment = 1
+
+[node name="Button3" type="Button" parent="Level_Choice/CenterContainer/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(170, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("8_y3jic")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Level_Choice/CenterContainer/PanelContainer/HBoxContainer/Button3"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -106.5
+offset_right = 100.0
+offset_bottom = 93.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 9
+alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Level_Choice/CenterContainer/PanelContainer/HBoxContainer/Button3/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("8_y3jic")
+text = "TUTORIAL"
+
+[node name="Panel" type="Panel" parent="Level_Choice/CenterContainer/PanelContainer/HBoxContainer/Button3/VBoxContainer"]
+texture_filter = 6
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_s30ul")
 
 [node name="Button" type="Button" parent="Level_Choice/CenterContainer/PanelContainer/HBoxContainer"]
 custom_minimum_size = Vector2(170, 200)
@@ -523,6 +570,7 @@ action_name = "reset"
 [connection signal="pressed" from="start_button" to="start_button" method="_on_pressed"]
 [connection signal="pressed" from="options_button" to="options_button" method="_on_pressed"]
 [connection signal="pressed" from="quit_button" to="quit_button" method="_on_pressed"]
+[connection signal="pressed" from="Level_Choice/CenterContainer/PanelContainer/HBoxContainer/Button3" to="Level_Choice" method="_on_button_3_pressed"]
 [connection signal="pressed" from="Level_Choice/CenterContainer/PanelContainer/HBoxContainer/Button" to="Level_Choice" method="_on_button_pressed"]
 [connection signal="pressed" from="Level_Choice/CenterContainer/PanelContainer/HBoxContainer/Button2" to="Level_Choice" method="_on_button_pressed"]
 [connection signal="pressed" from="Level_Choice/CenterContainer/PanelContainer/HBoxContainer/Button2" to="Level_Choice" method="_on_button_2_pressed"]

@@ -2,7 +2,7 @@
 extends EditorScript
 
 var path = "res://assets/level_imports/"
-var file_name = "garagem"
+var file_name = "tutorial"
 var file_extension = "glb"
 
 var tecido_script : Script = preload("res://scripts/surfaces/tecido.gd")
@@ -11,6 +11,7 @@ var estofado_script : Script = preload("res://scripts/surfaces/estofado.gd")
 var plastico_script : Script = preload("res://scripts/surfaces/plastico.gd")
 var rampa_script : Script = preload("res://scripts/surfaces/rampa.gd")
 var escorrega_script : Script = preload("res://scripts/surfaces/escorrega.gd")
+var surface_script : Script = preload("res://scripts/surfaces/surface.gd")
 
 func _run() -> void:
 	var scene_path = path + file_name + "." + file_extension
@@ -67,6 +68,8 @@ func _run() -> void:
 					collider.set_script(plastico_script)
 				elif "escorrega" in name_parts:
 					collider.set_script(escorrega_script)
+				elif "surface" in name_parts:
+					collider.set_script(surface_script)
 				scene_instance.remove_child(node)
 			else:
 				pass

@@ -7,4 +7,4 @@ func surface_iron(player):
 		player.water_meter.value -= 0.2
 
 func surface_jump(player):
-	player.current_jump_height = player.current_jump_height * 1.2
+	player.current_jump_height = player.current_jump_height * 1.5

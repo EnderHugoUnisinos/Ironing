@@ -27,12 +27,12 @@ point_count = 4
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_62mwj"]
 panorama = ExtResource("3_36kwo")
 
-[sub_resource type="Sky" id="Sky_tecsi"]
+[sub_resource type="Sky" id="Sky_3h7ct"]
 sky_material = SubResource("PanoramaSkyMaterial_62mwj")
 
 [sub_resource type="Environment" id="Environment_2g6q7"]
 background_mode = 2
-sky = SubResource("Sky_tecsi")
+sky = SubResource("Sky_3h7ct")
 ambient_light_sky_contribution = 0.0
 ambient_light_energy = 0.0
 reflected_light_source = 1

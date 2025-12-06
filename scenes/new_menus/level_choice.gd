@@ -14,3 +14,7 @@ func _on_button_pressed() -> void:
 func _on_button_2_pressed() -> void:
 	get_tree().current_scene.load_level_1()
 	#get_tree().change_scene_to_file("res://scenes/nivel/nivel_sala_de_estar.tscn")
+
+
+func _on_button_3_pressed() -> void:
+	get_tree().current_scene.load_tutorial()
