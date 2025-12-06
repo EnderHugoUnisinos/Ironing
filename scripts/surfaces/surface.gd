@@ -8,12 +8,15 @@ var jump : float
 var slip : float
 
 func surface_iron(player):
+	player.floor_max_angle = deg_to_rad(50)
 	pass
 
 func surface_walk(player):
+	player.floor_max_angle = deg_to_rad(50)
 	pass
 
 func surface_jump(player):
+	player.floor_max_angle = deg_to_rad(50)
 	pass
 
 func ramp():

@@ -27,12 +27,12 @@ point_count = 4
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_62mwj"]
 panorama = ExtResource("3_36kwo")
 
-[sub_resource type="Sky" id="Sky_tecsi"]
+[sub_resource type="Sky" id="Sky_3h7ct"]
 sky_material = SubResource("PanoramaSkyMaterial_62mwj")
 
 [sub_resource type="Environment" id="Environment_2g6q7"]
 background_mode = 2
-sky = SubResource("Sky_tecsi")
+sky = SubResource("Sky_3h7ct")
 ambient_light_sky_contribution = 0.0
 ambient_light_energy = 0.0
 reflected_light_source = 1
@@ -162,7 +162,6 @@ surface_material_override/0 = SubResource("ShaderMaterial_trvq3")
 
 [node name="Character_Iron" parent="." node_paths=PackedStringArray("stage_end") instance=ExtResource("3_us0c6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.87157, 0.0186346, -0.75703)
-visible = false
 floor_max_angle = 1.0472
 floor_snap_length = 0.5
 stage_end = NodePath("../EndDetect")

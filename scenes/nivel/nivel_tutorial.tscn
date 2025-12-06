@@ -1,0 +1,243 @@
+[gd_scene load_steps=30 format=3 uid="uid://dje1siyvuxwt7"]
+
+[ext_resource type="Script" uid="uid://g8rkbrglt7ro" path="res://scenes/nivel/level_manager.gd" id="1_v0ih1"]
+[ext_resource type="Texture2D" uid="uid://cf1541inf5dok" path="res://assets/textures/madeira.png" id="2_m207o"]
+[ext_resource type="PackedScene" uid="uid://bqihj45ser13n" path="res://assets/level_imports/tutorial.tscn" id="2_o0oqh"]
+[ext_resource type="Texture2D" uid="uid://btalrrd2hyftb" path="res://assets/textures/tecido.png" id="3_4filj"]
+[ext_resource type="PackedScene" uid="uid://cp8242762l2nq" path="res://objects/character_iron.tscn" id="3_da5y4"]
+[ext_resource type="Texture2D" uid="uid://c8hwv8jlafwoh" path="res://assets/textures/plastico.png" id="3_dqe10"]
+[ext_resource type="Texture2D" uid="uid://cn85h3nn60x4s" path="res://assets/textures/estofado.png" id="3_hkqv1"]
+[ext_resource type="Script" uid="uid://cjvu0q2j5dfph" path="res://objects/not_ready/end_level.gd" id="4_cqj2o"]
+[ext_resource type="LightmapGIData" uid="uid://bjctnilopfje2" path="res://assets/lightmaps/nivel_tutorial.lmbake" id="5_cqj2o"]
+[ext_resource type="PackedScene" uid="uid://b4vuri4638rx3" path="res://objects/roupas/camiseta_3.tscn" id="10_un0s4"]
+[ext_resource type="PackedScene" uid="uid://cfsvohnsp8s67" path="res://objects/roupas/camiseta_2.tscn" id="11_yfr5s"]
+[ext_resource type="PackedScene" uid="uid://dd22gktejw8jb" path="res://objects/roupas/camiseta_1.tscn" id="12_41pms"]
+[ext_resource type="PackedScene" uid="uid://df874r3erko3g" path="res://objects/roupas/bermuda_2.tscn" id="13_n1e86"]
+[ext_resource type="PackedScene" uid="uid://b14nn7t1e6a48" path="res://objects/roupas/bermuda_1.tscn" id="14_1mhy5"]
+[ext_resource type="PackedScene" uid="uid://ptqumiiam67u" path="res://objects/roupas/pilha_roupas.tscn" id="15_yfr5s"]
+[ext_resource type="PackedScene" uid="uid://lliqn6g28fcj" path="res://objects/roupas/pano.tscn" id="16_41pms"]
+[ext_resource type="PackedScene" uid="uid://eux6fpjdacaj" path="res://objects/rampas/rampa_25.tscn" id="17_n1e86"]
+[ext_resource type="PackedScene" uid="uid://d1shn2022psl7" path="res://objects/rampas/rampa_15.tscn" id="18_1mhy5"]
+[ext_resource type="PackedScene" uid="uid://ky8kv44ewrml" path="res://objects/rampas/rampa_45.tscn" id="19_yfly7"]
+[ext_resource type="PackedScene" uid="uid://bqy3xkhkhc5ha" path="res://objects/rampas/rampa_35.tscn" id="20_5angw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4filj"]
+size = Vector3(0.51, 1.77756, 0.687667)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dqe10"]
+flip_faces = true
+
+[sub_resource type="Shader" id="Shader_oqmtt"]
+code = "shader_type spatial;
+render_mode blend_add;
+
+uniform vec4 outline_color : source_color = vec4(0.999, 0.999, 0.999, 1);
+uniform float emission_strength : hint_range(0, 50) = 8;
+uniform bool is_highlighted = false;
+
+uniform float pulse_speed : hint_range(0, 5) = 3.0;
+
+varying vec3 world_position;
+uniform float min_height = -1;
+uniform float max_height = 0.4;
+
+void vertex() {
+	world_position = (MODEL_MATRIX * vec4(VERTEX.xy, 0.0, 1.0)).xyz;
+}
+
+void fragment() {
+	if (is_highlighted == true) {
+		float height = world_position.z - NODE_POSITION_WORLD.z;
+		float factor = clamp((height - min_height) / (max_height - min_height), 0.0, 1.0);
+        float pulse = sqrt(pow(sin(TIME * pulse_speed), 2));
+        float animated_emission = emission_strength * pulse;
+        float alpha = pow(1.0 - dot(NORMAL, VIEW), 3);
+
+		EMISSION = outline_color.rgb * animated_emission;
+		ALBEDO = outline_color.rgb;
+		ALPHA = mix(0.2, 0, factor);
+	}
+	else
+	{
+		discard;
+	}
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cqj2o"]
+render_priority = 0
+shader = SubResource("Shader_oqmtt")
+shader_parameter/outline_color = Color(0, 0.764706, 0.32549, 1)
+shader_parameter/emission_strength = 10.542
+shader_parameter/is_highlighted = true
+shader_parameter/pulse_speed = 2.0
+shader_parameter/min_height = -1.0
+shader_parameter/max_height = 0.256
+
+[sub_resource type="Curve3D" id="Curve3D_cqj2o"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.109682, -4.27365e-05, 30.061),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_oqmtt"]
+energy_multiplier = 2.0
+
+[sub_resource type="Sky" id="Sky_cqj2o"]
+sky_material = SubResource("ProceduralSkyMaterial_oqmtt")
+
+[sub_resource type="Environment" id="Environment_m207o"]
+background_mode = 2
+sky = SubResource("Sky_cqj2o")
+ambient_light_sky_contribution = 0.0
+ambient_light_energy = 0.0
+reflected_light_source = 1
+glow_enabled = true
+glow_normalized = true
+fog_density = 0.047
+fog_height = 824.89
+fog_height_density = -1.1111
+volumetric_fog_density = 0.2236
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_4filj"]
+
+[node name="NivelTutorial" type="Node3D"]
+script = ExtResource("1_v0ih1")
+
+[node name="Decal" type="Decal" parent="."]
+transform = Transform3D(0.55, 0, 0, 0, -2.40413e-08, -0.55, 0, 0.55, -2.40413e-08, 0, -0.368456, -6.20621)
+size = Vector3(3.86, 0.236328, 0.99)
+texture_albedo = ExtResource("2_m207o")
+
+[node name="Decal4" type="Decal" parent="."]
+transform = Transform3D(0.55, 0, 0, 0, -2.40413e-08, -0.55, 0, 0.55, -2.40413e-08, 0, 1.04364, -27.2816)
+size = Vector3(3.86, 0.236328, 0.99)
+texture_albedo = ExtResource("3_hkqv1")
+
+[node name="Decal5" type="Decal" parent="."]
+transform = Transform3D(0.55, 0, 0, 0, 0.55, -3.37508e-14, 0, 3.37508e-14, 0.55, 0, 1.69876, -16.0286)
+size = Vector3(3.86, 0.236328, 0.99)
+texture_albedo = ExtResource("3_hkqv1")
+cull_mask = 1048573
+
+[node name="Decal3" type="Decal" parent="."]
+transform = Transform3D(0.55, 0, 0, 0, -2.40413e-08, -0.55, 0, 0.55, -2.40413e-08, 0.768055, -0.368456, -13.0217)
+size = Vector3(3.86, 0.236328, 0.99)
+texture_albedo = ExtResource("3_dqe10")
+
+[node name="Decal2" type="Decal" parent="."]
+transform = Transform3D(0.55, 0, 0, 0, -2.40413e-08, -0.55, 0, 0.55, -2.40413e-08, 0, -0.368456, -1.48085)
+size = Vector3(3.86, 0.236328, 0.99)
+texture_albedo = ExtResource("3_4filj")
+
+[node name="tutorial" parent="." instance=ExtResource("2_o0oqh")]
+
+[node name="Character_Iron" parent="." instance=ExtResource("3_da5y4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0127903, 0.000590861, 2.48518)
+floor_max_angle = 1.0472
+floor_snap_length = 0.5
+
+[node name="EndDetect" type="Area3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.148168, 2.22824, -28.3573)
+script = ExtResource("4_cqj2o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EndDetect"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.388, 0.31789, 0.310115)
+shape = SubResource("BoxShape3D_4filj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="EndDetect"]
+transform = Transform3D(0.51, 0, 0, 0, 1.77756, 0, 0, 0, 0.687667, -0.388, 0.31789, 0.310115)
+mesh = SubResource("BoxMesh_dqe10")
+surface_material_override/0 = SubResource("ShaderMaterial_cqj2o")
+
+[node name="IntroPath" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.117436, 2.23889, -25.7946)
+curve = SubResource("Curve3D_cqj2o")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="IntroPath"]
+transform = Transform3D(0.999839, 5.18625e-09, 0.0036481, 0, 0.999832, -1.42143e-06, -0.0036481, 1.4214e-06, 0.999839, -0.254998, -0.065, 0.000930316)
+h_offset = -0.255
+v_offset = -0.065
+rotation_mode = 2
+use_model_front = true
+loop = false
+
+[node name="Camera3D" type="Camera3D" parent="IntroPath/PathFollow3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_m207o")
+camera_attributes = SubResource("CameraAttributesPractical_4filj")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(0.970577, 0.00652681, -0.240702, 0.102169, 0.894023, 0.436216, 0.21804, -0.447974, 0.867051, 0, 2.56129, 3.6208)
+light_indirect_energy = 2.0
+light_bake_mode = 1
+shadow_enabled = true
+
+[node name="LightmapGI" type="LightmapGI" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.946649, 0.322266, 0, -0.322266, 0.946649, 0, 2.56129, 3.6208)
+quality = 2
+supersampling = true
+bounces = 4
+light_data = ExtResource("5_cqj2o")
+
+[node name="camiseta_32" parent="." instance=ExtResource("10_un0s4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.843522, 0.00378918, -3.52751)
+
+[node name="camiseta_22" parent="." instance=ExtResource("11_yfr5s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.616144, 0.0038666, -2.61854)
+
+[node name="camiseta_12" parent="." instance=ExtResource("12_41pms")]
+transform = Transform3D(-0.771469, 0, 0.636267, 0, 1, 0, -0.636267, 0, -0.771469, 0.765875, 0.00754404, -2.24474)
+
+[node name="bermuda_22" parent="." instance=ExtResource("13_n1e86")]
+transform = Transform3D(0.875169, 0, -0.483817, 0, 1, 0, 0.483817, 0, 0.875169, -1.42194, 0.00378918, -2.28894)
+
+[node name="bermuda_12" parent="." instance=ExtResource("14_1mhy5")]
+transform = Transform3D(0.86613, 0, 0.499819, 0, 1, 0, -0.499819, 0, 0.86613, -0.487078, 0.00378906, -3.89655)
+
+[node name="camiseta_23" parent="." instance=ExtResource("11_yfr5s")]
+transform = Transform3D(0.705921, 0, 0.708291, 0, 1, 0, -0.708291, 0, 0.705921, 0.43546, 0.0553065, -7.74424)
+
+[node name="pilha_roupas2" parent="." instance=ExtResource("15_yfr5s")]
+transform = Transform3D(-0.784289, 0, -0.620395, 0, 1, 0, 0.620395, 0, -0.784289, -1.41422, 1.68918, -16.2733)
+
+[node name="pilha_roupas3" parent="." instance=ExtResource("15_yfr5s")]
+transform = Transform3D(-1.14791, 0, -1.1074, 0, 1.595, 0, 1.1074, 0, -1.14791, -0.0209525, 0.0752929, -2.99915)
+
+[node name="pano2" parent="." instance=ExtResource("16_41pms")]
+transform = Transform3D(0.881962, 0, -0.47132, 0, 1, 0, 0.47132, 0, 0.881962, 1.16855, 1.64328, -16.2587)
+
+[node name="rampa_25" parent="." instance=ExtResource("17_n1e86")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.0398638, 9.0003e-06, 0.434949)
+
+[node name="rampa_26" parent="." instance=ExtResource("17_n1e86")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.19349, 9.05991e-06, -4.30404)
+
+[node name="rampa_15" parent="." instance=ExtResource("18_1mhy5")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.468023, 8.9407e-06, -4.24315)
+
+[node name="rampa_45" parent="." instance=ExtResource("19_yfly7")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.211757, 9.05991e-06, -3.97314)
+
+[node name="bermuda_23" parent="." instance=ExtResource("13_n1e86")]
+transform = Transform3D(0.894334, 0, 0.4474, 0, 1, 0, -0.4474, 0, 0.894334, -0.0431684, 0.055229, -6.88167)
+
+[node name="bermuda_13" parent="." instance=ExtResource("14_1mhy5")]
+transform = Transform3D(0.950266, 0, -0.311439, 0, 1, 0, 0.311439, 0, 0.950266, -0.869365, 0.055229, -8.60968)
+
+[node name="rampa_27" parent="." instance=ExtResource("17_n1e86")]
+transform = Transform3D(-0.171448, 0, -0.985193, 0, 1, 0, 0.985193, 0, -0.171448, -0.81704, 0.0514491, -8.83379)
+
+[node name="rampa_35" parent="." instance=ExtResource("20_5angw")]
+transform = Transform3D(0.128294, 0, -0.991736, 0, 1, 0, 0.991736, 0, 0.128294, 0.977412, 0.051449, -8.75583)
+
+[node name="rampa_36" parent="." instance=ExtResource("20_5angw")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.0805169, 1.63828, -16.432)
+
+[node name="rampa_16" parent="." instance=ExtResource("18_1mhy5")]
+transform = Transform3D(-0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, -0.258819, -1.38639, 1.73638, -16.4567)
+
+[connection signal="body_entered" from="EndDetect" to="EndDetect" method="_on_body_entered"]
+[connection signal="body_exited" from="EndDetect" to="EndDetect" method="_on_body_exited"]

@@ -1,16 +1,17 @@
 extends Node
 
-enum Scene {MENU, GARAGEM, SALA}
+enum Scene {MENU, GARAGEM, SALA, TUTORIAL}
 var current_scene : Scene = Scene.MENU
 
 const MENU_SCENE_PATH : String = "res://scenes/new_menus/main_menu.tscn"
+const TUTORIAL_SCENE_PATH : String = "res://scenes/nivel/nivel_tutorial.tscn"
 const GARAGE_SCENE_PATH : String = "res://scenes/nivel/nivel_garagem.tscn"
 const LIVING_ROOM_SCENE_PATH : String = "res://scenes/nivel/nivel_sala_de_estar.tscn"
 
 @onready var end_level_GUI : Control = $EndLevel
 
 var load_scene
-var level_dict = {Scene.MENU : null, Scene.GARAGEM : null, Scene.SALA : null}
+var level_dict = {Scene.MENU : null, Scene.GARAGEM : null, Scene.SALA : null, Scene.TUTORIAL : null}
 
 var instanced_scene : Node
 var starting_cutscene_played : bool = false
@@ -23,6 +24,7 @@ var water_level : String = "100%"
 func _ready() -> void:
 	ResourceLoader.load_threaded_request(GARAGE_SCENE_PATH)
 	ResourceLoader.load_threaded_request(MENU_SCENE_PATH)
+	ResourceLoader.load_threaded_request(TUTORIAL_SCENE_PATH)
 	ResourceLoader.load_threaded_request(LIVING_ROOM_SCENE_PATH)
 	load_main_menu()
 
@@ -43,6 +45,15 @@ func load_main_menu():
 	if !level_dict[Scene.MENU]:
 		level_dict[Scene.MENU] = ResourceLoader.load_threaded_get(MENU_SCENE_PATH)
 	load_scene = level_dict[Scene.MENU]
+	instantiate_scene()
+
+func load_tutorial():
+	current_scene = Scene.TUTORIAL
+	starting_cutscene_played = false
+	remove_children()
+	if !level_dict[Scene.TUTORIAL]:
+		level_dict[Scene.TUTORIAL] = ResourceLoader.load_threaded_get(TUTORIAL_SCENE_PATH)
+	load_scene = level_dict[Scene.TUTORIAL]
 	instantiate_scene()
 
 func load_level_0():

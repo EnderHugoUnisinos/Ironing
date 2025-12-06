@@ -49,6 +49,7 @@ data = PackedVector3Array(-0.3948, -0.005, 0.2884, -0.3948, 0.0029, -0.2884, -0.
 [node name="pano2" type="Node3D"]
 
 [node name="pano" type="MeshInstance3D" parent="."]
+layers = 2
 mesh = SubResource("ArrayMesh_idoe7")
 skeleton = NodePath("")
 
